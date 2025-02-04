@@ -1,1 +1,1 @@
-export const ROUTE__MAIN = '/main';
+export const ROUTE__ENTER_PHONE_STEP = '/';
