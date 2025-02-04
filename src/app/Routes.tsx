@@ -2,12 +2,12 @@ import {FC, memo} from 'react';
 import {Navigate, Route, Routes as ReactRoutes} from 'react-router-dom';
 
 import {ROUTE__MAIN} from '@/constants';
-import Main from '@/pages/Main';
+import Auth from '@/pages/Auth';
 
 const Routes: FC = () => {
   return (
     <ReactRoutes>
-      <Route path={ROUTE__MAIN} element={<Main />} />
+      <Route path={ROUTE__MAIN} element={<Auth />} />
       <Route path="*" element={<Navigate to={ROUTE__MAIN} replace />} />
     </ReactRoutes>
   );
