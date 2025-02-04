@@ -5,6 +5,7 @@ import {createTheme, ThemeProvider} from '@mui/material/styles';
 import GlobalStyles from './GlobalStyles';
 import Routes from '@/app/Routes';
 import {isProduction} from '@/constants';
+import {AuthDataProvider} from '@/contexts/AuthDataContext';
 
 const theme = createTheme();
 
@@ -34,7 +35,9 @@ const App = () => {
     <ThemeProvider theme={theme}>
       <BrowserRouter>
         <GlobalStyles />
-        <Routes />
+        <AuthDataProvider>
+          <Routes />
+        </AuthDataProvider>
       </BrowserRouter>
     </ThemeProvider>
   );

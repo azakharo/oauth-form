@@ -2,21 +2,23 @@ import {Button, Container, Stack} from '@mui/material';
 import {useForm} from 'react-hook-form';
 import {TextFieldElement} from 'react-hook-form-mui';
 import {useNavigate} from 'react-router-dom';
-import {ROUTE__ENTER_PASSWORD_STEP} from '../../constants';
+import {ROUTE__ENTER_PASSWORD_STEP} from '@/constants';
+import {useAuthData} from '@/contexts/AuthDataContext';
 
 export const EnterCodeStep = () => {
   const navigate = useNavigate();
+  const {code, setCode} = useAuthData();
   const {control, handleSubmit} = useForm({
     defaultValues: {
-      code: '',
+      code,
     },
   });
 
   return (
     <Container maxWidth="sm">
       <form
-        onSubmit={handleSubmit(data => {
-          console.log(data);
+        onSubmit={handleSubmit(values => {
+          setCode(values.code);
           navigate(ROUTE__ENTER_PASSWORD_STEP);
         })}
         noValidate

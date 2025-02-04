@@ -3,19 +3,21 @@ import {useForm} from 'react-hook-form';
 import {TextFieldElement} from 'react-hook-form-mui';
 import { useNavigate } from 'react-router-dom';
 import {ROUTE__ENTER_CODE_STEP} from '@/constants';
+import {useAuthData} from '@/contexts/AuthDataContext';
 
 export const EnterPhoneStep = () => {
   const navigate = useNavigate();
+  const {phone, setPhone} = useAuthData();
   const {control, handleSubmit} = useForm({
     defaultValues: {
-      phone: '',
+      phone,
     },
   })
 
   return (
     <Container maxWidth="sm">
-      <form onSubmit={handleSubmit((data) => {
-        console.log(data);
+      <form onSubmit={handleSubmit(values => {
+        setPhone(values.phone);
         navigate(ROUTE__ENTER_CODE_STEP)
       })} noValidate style={{marginTop: 60}}>
         <Stack spacing={2}>
