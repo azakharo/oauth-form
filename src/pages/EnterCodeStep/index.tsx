@@ -1,9 +1,10 @@
-import {Button, Container, Stack} from '@mui/material';
+import {Button, Stack} from '@mui/material';
 import {useForm} from 'react-hook-form';
 import {TextFieldElement} from 'react-hook-form-mui';
 import {useNavigate} from 'react-router-dom';
 import {ROUTE__ENTER_PASSWORD_STEP} from '@/constants';
 import {useAuthData} from '@/contexts/AuthDataContext';
+import {StepPageLayout} from '@/components/StepPageLayout';
 
 export const EnterCodeStep = () => {
   const navigate = useNavigate();
@@ -15,7 +16,7 @@ export const EnterCodeStep = () => {
   });
 
   return (
-    <Container maxWidth="sm">
+    <StepPageLayout>
       <form
         onSubmit={handleSubmit(values => {
           setCode(values.code);
@@ -38,6 +39,6 @@ export const EnterCodeStep = () => {
           </Button>
         </Stack>
       </form>
-    </Container>
+    </StepPageLayout>
   );
 };

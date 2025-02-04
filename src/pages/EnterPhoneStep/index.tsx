@@ -1,9 +1,10 @@
-import {Button, Container, Stack} from '@mui/material';
+import {Button, Stack} from '@mui/material';
 import {useForm} from 'react-hook-form';
 import {TextFieldElement} from 'react-hook-form-mui';
 import { useNavigate } from 'react-router-dom';
 import {ROUTE__ENTER_CODE_STEP} from '@/constants';
 import {useAuthData} from '@/contexts/AuthDataContext';
+import {StepPageLayout} from '@/components/StepPageLayout';
 
 export const EnterPhoneStep = () => {
   const navigate = useNavigate();
@@ -15,7 +16,7 @@ export const EnterPhoneStep = () => {
   })
 
   return (
-    <Container maxWidth="sm">
+    <StepPageLayout>
       <form onSubmit={handleSubmit(values => {
         setPhone(values.phone);
         navigate(ROUTE__ENTER_CODE_STEP)
@@ -34,6 +35,6 @@ export const EnterPhoneStep = () => {
           </Button>
         </Stack>
       </form>
-    </Container>
+    </StepPageLayout>
   );
 };

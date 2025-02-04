@@ -1,7 +1,8 @@
-import {Button, Container, Stack} from '@mui/material';
+import {Button, Stack} from '@mui/material';
 import {useForm} from 'react-hook-form';
 import {TextFieldElement} from 'react-hook-form-mui';
 import {useAuthData} from '@/contexts/AuthDataContext';
+import {StepPageLayout} from '@/components/StepPageLayout';
 
 export const EnterPasswordStep = () => {
   const {phone, code, password, setPassword} = useAuthData();
@@ -13,7 +14,7 @@ export const EnterPasswordStep = () => {
   })
 
   return (
-    <Container maxWidth="sm">
+    <StepPageLayout>
       <form onSubmit={handleSubmit(values => {
         setPassword(values.password);
         alert(`You entered phone ${phone}, code ${code}, password ${values.password}`);
@@ -32,6 +33,6 @@ export const EnterPasswordStep = () => {
           </Button>
         </Stack>
       </form>
-    </Container>
+    </StepPageLayout>
   );
 };
