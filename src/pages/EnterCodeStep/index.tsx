@@ -1,34 +1,28 @@
 import {Button, Container, Stack} from '@mui/material';
 import {useForm} from 'react-hook-form';
 import {TextFieldElement} from 'react-hook-form-mui';
-import { useNavigate } from 'react-router-dom';
-import {ROUTE__ENTER_CODE_STEP} from '@/constants';
 
-export const EnterPhoneStep = () => {
-  const navigate = useNavigate();
+export const EnterCodeStep = () => {
   const {control, handleSubmit} = useForm({
     defaultValues: {
-      phone: '',
+      code: '',
     },
   })
 
   return (
     <Container maxWidth="sm">
-      <form onSubmit={handleSubmit((data) => {
-        console.log(data);
-        navigate(ROUTE__ENTER_CODE_STEP)
-      })} noValidate style={{marginTop: 60}}>
+      <form onSubmit={handleSubmit((data) => console.log(data))} noValidate style={{marginTop: 60}}>
         <Stack spacing={2}>
           <TextFieldElement
-            name={'phone'}
-            label={'Номер телефона'}
+            name={'code'}
+            label={'Введите код'}
             control={control}
             required
             fullWidth
           />
 
           <Button type={'submit'} color={'primary'} variant="contained">
-            Получить код
+            Далее
           </Button>
         </Stack>
       </form>
