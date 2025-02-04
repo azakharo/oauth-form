@@ -23,7 +23,6 @@ export const EnterCodeStep = () => {
           navigate(ROUTE__ENTER_PASSWORD_STEP);
         })}
         noValidate
-        style={{marginTop: 60}}
       >
         <Stack spacing={2}>
           <TextFieldElement

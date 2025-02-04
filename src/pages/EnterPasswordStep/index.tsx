@@ -11,14 +11,19 @@ export const EnterPasswordStep = () => {
     defaultValues: {
       password,
     },
-  })
+  });
 
   return (
     <StepPageLayout>
-      <form onSubmit={handleSubmit(values => {
-        setPassword(values.password);
-        alert(`You entered phone ${phone}, code ${code}, password ${values.password}`);
-      })} noValidate style={{marginTop: 60}}>
+      <form
+        onSubmit={handleSubmit(values => {
+          setPassword(values.password);
+          alert(
+            `You entered phone ${phone}, code ${code}, password ${values.password}`,
+          );
+        })}
+        noValidate
+      >
         <Stack spacing={2}>
           <TextFieldElement
             name={'password'}
