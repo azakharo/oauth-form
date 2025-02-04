@@ -16,7 +16,7 @@ export const EnterPhoneStep = () => {
   });
 
   return (
-    <StepPageLayout>
+    <StepPageLayout title="Вход">
       <form
         onSubmit={handleSubmit(values => {
           setPhone(values.phone);

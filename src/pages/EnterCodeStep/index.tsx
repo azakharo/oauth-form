@@ -16,7 +16,7 @@ export const EnterCodeStep = () => {
   });
 
   return (
-    <StepPageLayout>
+    <StepPageLayout title="Введите код">
       <form
         onSubmit={handleSubmit(values => {
           setCode(values.code);

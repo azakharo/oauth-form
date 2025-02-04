@@ -14,7 +14,7 @@ export const EnterPasswordStep = () => {
   });
 
   return (
-    <StepPageLayout>
+    <StepPageLayout title="Введите пароль">
       <form
         onSubmit={handleSubmit(values => {
           setPassword(values.password);
