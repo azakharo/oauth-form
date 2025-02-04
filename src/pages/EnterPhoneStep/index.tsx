@@ -24,7 +24,7 @@ export const EnterPhoneStep = () => {
         })}
         noValidate
       >
-        <Stack spacing={2}>
+        <Stack spacing={3}>
           <TextFieldElement
             name={'phone'}
             label={'Номер телефона'}
