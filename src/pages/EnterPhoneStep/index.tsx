@@ -5,13 +5,23 @@ import {useNavigate} from 'react-router-dom';
 import {ROUTE__ENTER_CODE_STEP} from '@/constants';
 import {useAuthData} from '@/contexts/AuthDataContext';
 import {StepPageLayout} from '@/components/StepPageLayout';
+import useRequest from 'ahooks/es/useRequest';
+import {enterPhone} from '@/api';
 
 export const EnterPhoneStep = () => {
   const navigate = useNavigate();
-  const {phone, setPhone} = useAuthData();
+  const {phone, setPhone, setTokenToEnterSmsCode} = useAuthData();
   const {control, handleSubmit} = useForm({
     defaultValues: {
       phone,
+    },
+  });
+  const {loading, run, params} = useRequest(enterPhone, {
+    manual: true,
+    onSuccess: token => {
+      setPhone(params[0] as string);
+      setTokenToEnterSmsCode(token);
+      navigate(ROUTE__ENTER_CODE_STEP);
     },
   });
 
@@ -19,8 +29,7 @@ export const EnterPhoneStep = () => {
     <StepPageLayout title="Вход">
       <form
         onSubmit={handleSubmit(values => {
-          setPhone(values.phone);
-          navigate(ROUTE__ENTER_CODE_STEP);
+          run(values.phone);
         })}
         noValidate
       >
@@ -33,7 +42,12 @@ export const EnterPhoneStep = () => {
             fullWidth
           />
 
-          <Button type={'submit'} color={'primary'} variant="contained">
+          <Button
+            type={'submit'}
+            color={'primary'}
+            variant="contained"
+            disabled={loading}
+          >
             Получить код
           </Button>
         </Stack>

@@ -14,6 +14,7 @@
     "@hookform/resolvers": "3.9.1",
     "@mui/icons-material": "5.15.17",
     "@mui/material": "5.15.17",
+    "ahooks": "3.8.4",
     "axios": "1.7.9",
     "clsx": "2.1.1",
     "react": "18.3.1",

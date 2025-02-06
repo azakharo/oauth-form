@@ -10,6 +10,9 @@ export interface ContextProps {
   phone: string;
   setPhone: (value: string) => void;
 
+  tokenToEnterSmsCode: string;
+  setTokenToEnterSmsCode: (value: string) => void;
+
   code: string;
   setCode: (value: string) => void;
 
@@ -20,6 +23,8 @@ export interface ContextProps {
 export const AuthDataContext = createContext<ContextProps>({
   phone: '',
   setPhone: () => {},
+  tokenToEnterSmsCode: '',
+  setTokenToEnterSmsCode: () => {},
   code: '',
   setCode: () => {},
   password: '',
@@ -28,6 +33,7 @@ export const AuthDataContext = createContext<ContextProps>({
 
 export const AuthDataProvider: FC<PropsWithChildren> = ({children}) => {
   const [phone, setPhone] = useState('');
+  const [tokenToEnterSmsCode, setTokenToEnterSmsCode] = useState('');
   const [code, setCode] = useState('');
   const [password, setPassword] = useState('');
 
@@ -35,12 +41,23 @@ export const AuthDataProvider: FC<PropsWithChildren> = ({children}) => {
     () => ({
       phone,
       setPhone,
+      tokenToEnterSmsCode,
+      setTokenToEnterSmsCode,
       code,
       setCode,
       password,
       setPassword,
     }),
-    [phone, setPhone, code, setCode, password, setPassword],
+    [
+      phone,
+      setPhone,
+      code,
+      setCode,
+      password,
+      setPassword,
+      tokenToEnterSmsCode,
+      setTokenToEnterSmsCode,
+    ],
   );
 
   return (
