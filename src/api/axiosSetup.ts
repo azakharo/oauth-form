@@ -8,7 +8,9 @@ axi.interceptors.response.use(
   response => response,
   (error: unknown) => {
     if (isAxiosError(error)) {
-      const errorMessage = error.response?.data?.detail?.msg as string;
+      const errorMessage1 = error.response?.data?.detail?.msg as string;
+      const errorMessage2 = error.response?.data?.detail as string;
+      const errorMessage = errorMessage1 || errorMessage2;
       if (errorMessage) {
         return Promise.reject(new Error(errorMessage));
       }

@@ -3,9 +3,13 @@ import {useForm} from 'react-hook-form';
 import {TextFieldElement} from 'react-hook-form-mui';
 import {useAuthData} from '@/contexts/AuthDataContext';
 import {StepPageLayout} from '@/components/StepPageLayout';
+import useRequest from 'ahooks/es/useRequest';
+import {enterPassword} from '@/api';
+import {ErrorMessage} from '@/components/ErrorMessage';
 
 export const EnterPasswordStep = () => {
-  const {phone, code, password, setPassword} = useAuthData();
+  const {password, setPassword, tokenToEnterPassword, setTokenToGetGrants} =
+    useAuthData();
 
   const {control, handleSubmit} = useForm({
     defaultValues: {
@@ -13,14 +17,22 @@ export const EnterPasswordStep = () => {
     },
   });
 
+  const {loading, error, run, params} = useRequest(enterPassword, {
+    manual: true,
+    onSuccess: token => {
+      setPassword(params[0] as string);
+      setTokenToGetGrants(token);
+      alert(
+        `The password has been successfully sent. The backend returned token "${token}"`,
+      );
+    },
+  });
+
   return (
     <StepPageLayout title="Введите пароль">
       <form
         onSubmit={handleSubmit(values => {
-          setPassword(values.password);
-          alert(
-            `You entered phone ${phone}, code ${code}, password ${values.password}`,
-          );
+          run(values.password, tokenToEnterPassword);
         })}
         noValidate
       >
@@ -32,8 +44,14 @@ export const EnterPasswordStep = () => {
             required
             fullWidth
           />
+          {error && <ErrorMessage error={error} />}
 
-          <Button type={'submit'} color={'primary'} variant="contained">
+          <Button
+            type={'submit'}
+            color={'primary'}
+            variant="contained"
+            disabled={loading}
+          >
             Далее
           </Button>
         </Stack>

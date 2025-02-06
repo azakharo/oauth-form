@@ -29,10 +29,10 @@ export const enterSmsCode = async (
   return response.data.token;
 };
 
-// Returns access token for the logged-in user
+// Returns token which can be used to get app grants
 export const enterPassword = async (
   password: string,
-  userToken: string,
+  token: string,
 ): Promise<string> => {
   const response = await axi.post<
     {password: string},
@@ -46,7 +46,7 @@ export const enterPassword = async (
     },
     {
       headers: {
-        Authorization: `Bearer ${userToken}`,
+        Authorization: `Bearer ${token}`,
       },
     },
   );
