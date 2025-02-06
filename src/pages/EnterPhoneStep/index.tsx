@@ -12,11 +12,13 @@ import {ErrorMessage} from '@/components/ErrorMessage';
 export const EnterPhoneStep = () => {
   const navigate = useNavigate();
   const {phone, setPhone, setTokenToEnterSmsCode} = useAuthData();
+
   const {control, handleSubmit} = useForm({
     defaultValues: {
       phone,
     },
   });
+
   const {loading, error, run, params} = useRequest(enterPhone, {
     manual: true,
     onSuccess: token => {

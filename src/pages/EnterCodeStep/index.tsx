@@ -5,13 +5,27 @@ import {useNavigate} from 'react-router-dom';
 import {ROUTE__ENTER_PASSWORD_STEP} from '@/constants';
 import {useAuthData} from '@/contexts/AuthDataContext';
 import {StepPageLayout} from '@/components/StepPageLayout';
+import useRequest from 'ahooks/es/useRequest';
+import {enterSmsCode} from '@/api';
+import {ErrorMessage} from '@/components/ErrorMessage';
 
 export const EnterCodeStep = () => {
   const navigate = useNavigate();
-  const {code, setCode} = useAuthData();
+  const {code, setCode, tokenToEnterSmsCode, setTokenToEnterPassword} =
+    useAuthData();
+
   const {control, handleSubmit} = useForm({
     defaultValues: {
       code,
+    },
+  });
+
+  const {loading, error, run, params} = useRequest(enterSmsCode, {
+    manual: true,
+    onSuccess: token => {
+      setCode(params[0] as string);
+      setTokenToEnterPassword(token);
+      navigate(ROUTE__ENTER_PASSWORD_STEP);
     },
   });
 
@@ -19,8 +33,7 @@ export const EnterCodeStep = () => {
     <StepPageLayout title="Введите код">
       <form
         onSubmit={handleSubmit(values => {
-          setCode(values.code);
-          navigate(ROUTE__ENTER_PASSWORD_STEP);
+          run(values.code, tokenToEnterSmsCode);
         })}
         noValidate
       >
@@ -32,8 +45,14 @@ export const EnterCodeStep = () => {
             required
             fullWidth
           />
+          {error && <ErrorMessage error={error} />}
 
-          <Button type={'submit'} color={'primary'} variant="contained">
+          <Button
+            type={'submit'}
+            color={'primary'}
+            variant="contained"
+            disabled={loading}
+          >
             Далее
           </Button>
         </Stack>
