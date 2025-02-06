@@ -1,4 +1,4 @@
-import {Button, FormHelperText, Stack} from '@mui/material';
+import {Button, Stack} from '@mui/material';
 import {useForm} from 'react-hook-form';
 import {TextFieldElement} from 'react-hook-form-mui';
 import {useNavigate} from 'react-router-dom';
@@ -7,6 +7,7 @@ import {useAuthData} from '@/contexts/AuthDataContext';
 import {StepPageLayout} from '@/components/StepPageLayout';
 import useRequest from 'ahooks/es/useRequest';
 import {enterPhone} from '@/api';
+import {ErrorMessage} from '@/components/ErrorMessage';
 
 export const EnterPhoneStep = () => {
   const navigate = useNavigate();
@@ -41,11 +42,7 @@ export const EnterPhoneStep = () => {
             required
             fullWidth
           />
-          {error && (
-            <FormHelperText sx={{marginTop: '4px !important'}} error={true}>
-              {error.message}
-            </FormHelperText>
-          )}
+          {error && <ErrorMessage error={error} />}
 
           <Button
             type={'submit'}
