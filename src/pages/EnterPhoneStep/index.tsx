@@ -1,4 +1,4 @@
-import {Button, Stack} from '@mui/material';
+import {Button, FormHelperText, Stack} from '@mui/material';
 import {useForm} from 'react-hook-form';
 import {TextFieldElement} from 'react-hook-form-mui';
 import {useNavigate} from 'react-router-dom';
@@ -16,7 +16,7 @@ export const EnterPhoneStep = () => {
       phone,
     },
   });
-  const {loading, run, params} = useRequest(enterPhone, {
+  const {loading, error, run, params} = useRequest(enterPhone, {
     manual: true,
     onSuccess: token => {
       setPhone(params[0] as string);
@@ -41,6 +41,11 @@ export const EnterPhoneStep = () => {
             required
             fullWidth
           />
+          {error && (
+            <FormHelperText sx={{marginTop: '4px !important'}} error={true}>
+              {error.message}
+            </FormHelperText>
+          )}
 
           <Button
             type={'submit'}
