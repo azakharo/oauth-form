@@ -31,25 +31,15 @@ export const enterSmsCode = async (
   return response.data.employee.token;
 };
 
-interface User {
-  firstName: string;
-  lastName: string;
-}
-
-// Returns the logged-in user
+// Returns access token for the logged-in user
 export const enterPassword = async (
   password: string,
   userToken: string,
-): Promise<User> => {
+): Promise<string> => {
   const response = await axi.post<
     {password: string},
     AxiosResponse<{
-      employee: {
-        employee: {
-          FirstName: string;
-          LastName: string;
-        };
-      };
+      token: string;
     }>
   >(
     `${authPathPrefix}/password`,
@@ -63,11 +53,5 @@ export const enterPassword = async (
     },
   );
 
-  const {FirstName: firstName, LastName: lastName} =
-    response.data.employee.employee;
-
-  return {
-    firstName,
-    lastName,
-  };
+  return response.data.token;
 };
