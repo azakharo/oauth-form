@@ -1,7 +1,9 @@
 import axios, {isAxiosError} from 'axios';
+import {isDevelopment} from '@/constants';
 
 export const axi = axios.create({
-  baseURL: '/api/v0/auth',
+  // For development the proxying in the devserver is used
+  baseURL: (isDevelopment ? '' : import.meta.env.VITE_API_URL) + '/api/v0/auth',
 });
 
 axi.interceptors.response.use(
