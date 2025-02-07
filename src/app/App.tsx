@@ -6,6 +6,7 @@ import GlobalStyles from './GlobalStyles';
 import Routes from '@/app/Routes';
 import {isProduction} from '@/constants';
 import {AuthDataProvider} from '@/contexts/AuthDataContext';
+import './font.css';
 
 const theme = createTheme();
 
