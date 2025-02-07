@@ -1,14 +1,13 @@
 import {memo, useEffect} from 'react';
 import {BrowserRouter} from 'react-router-dom';
-import {createTheme, ThemeProvider} from '@mui/material/styles';
+import {ThemeProvider} from '@mui/material/styles';
 
 import GlobalStyles from './GlobalStyles';
 import Routes from '@/app/Routes';
 import {isProduction} from '@/constants';
 import {AuthDataProvider} from '@/contexts/AuthDataContext';
 import './font.css';
-
-const theme = createTheme();
+import theme from '@/theme';
 
 const vitePreloadErrorEvent = 'vite:preloadError';
 const vitePreloadErrorHandler = () => {
