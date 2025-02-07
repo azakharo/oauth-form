@@ -1,4 +1,5 @@
 import MuiGlobalStyles from '@mui/material/GlobalStyles';
+import {fontFamilyAdditional, fontFamilyMain} from '@/theme/typography';
 
 const GlobalStyles = (): JSX.Element => {
   return (
@@ -14,7 +15,7 @@ const GlobalStyles = (): JSX.Element => {
           MozOsxFontSmoothing: 'grayscale',
           height: '100%',
           width: '100%',
-          fontFamily: 'Roboto, Helvetica, Arial, sans-serif',
+          fontFamily: `${fontFamilyMain}, ${fontFamilyAdditional}, Roboto, sans-serif, Helvetica, Arial`,
         },
         body: {
           height: '100%',
