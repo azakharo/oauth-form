@@ -3,8 +3,11 @@ import {ruRU} from '@mui/material/locale';
 import {createTheme} from '@mui/material/styles';
 
 import {
+  COLOR__BACK,
   COLOR__ERROR,
   COLOR__INFO,
+  COLOR__LIGHT_GRAY,
+  COLOR__LINE,
   COLOR__MAIN_BLACK,
   COLOR__PRIMARY,
   COLOR__SECONDARY,
@@ -80,66 +83,66 @@ const theme = createTheme(
           },
         },
       },
-      // MuiTextField: {
-      //   variants: [
-      //     {
-      //       props: {variant: 'outlined'},
-      //       style: {
-      //         '& input': {
-      //           padding: '14px 12px',
-      //           fontSize: 15,
-      //           fontWeight: 400,
-      //           lineHeight: '20px',
-      //         },
-      //         '& input::placeholder': {
-      //           color: COLOR__GRAY,
-      //           fontSize: 15,
-      //           fontWeight: 400,
-      //           lineHeight: '20px',
-      //           opacity: 1,
-      //         },
-      //         border: 'none',
-      //         '& fieldset': {
-      //           // Stuff necessary for placing label above TextField (outside)
-      //           // https://github.com/mui/material-ui/issues/30379#issuecomment-1175806105
-      //           top: 0,
-      //           borderRadius: '4px',
-      //           border: `1px solid ${COLOR__BG_5}`,
-      //         },
-      //         '&:hover fieldset': {
-      //           border: `1px solid ${COLOR__BG_6} !important`,
-      //         },
-      //         '&:focus-within fieldset, &:focus-visible fieldset': {
-      //           border: `2px solid ${COLOR__VIOLET_LIGHT} !important`,
-      //         },
-      //         '& .MuiInputBase-root.Mui-disabled': {
-      //           backgroundColor: COLOR__BG_1,
-      //         },
-      //         // Stuff necessary for placing label above TextField (outside)
-      //         // https://github.com/mui/material-ui/issues/30379#issuecomment-1175806105
-      //         '& legend': {display: 'none'},
-      //       },
-      //     },
-      //   ],
-      // },
-      // MuiInputLabel: {
-      //   defaultProps: {
-      //     shrink: true,
-      //   },
-      //   styleOverrides: {
-      //     root: {
-      //       color: `${COLOR__GRAY} !important`,
-      //       fontSize: 14,
-      //       fontWeight: 400,
-      //       lineHeight: '16px',
-      //     },
-      //     // Stuff necessary for placing label above TextField (outside)
-      //     // https://github.com/mui/material-ui/issues/30379#issuecomment-1175806105
-      //     shrink: {
-      //       transform: 'translate(0px, -20px) scale(1) !important',
-      //     },
-      //   },
-      // },
+      MuiTextField: {
+        variants: [
+          {
+            props: {variant: 'outlined'},
+            style: {
+              '& input': {
+                padding: '16px 10px',
+                // fontSize: 15,
+                // fontWeight: 400,
+                // lineHeight: '20px',
+              },
+              '& input::placeholder': {
+                color: COLOR__PRIMARY,
+                // fontSize: 15,
+                // fontWeight: 400,
+                // lineHeight: '20px',
+                // opacity: 1,
+              },
+              border: 'none',
+              '& fieldset': {
+                // Stuff necessary for placing label above TextField (outside)
+                // https://github.com/mui/material-ui/issues/30379#issuecomment-1175806105
+                top: 0,
+                borderRadius: '10px',
+                border: `1px solid ${COLOR__LINE}`,
+              },
+              '&:hover fieldset': {
+                border: `1px solid ${COLOR__LIGHT_GRAY} !important`,
+              },
+              '&:focus-within fieldset, &:focus-visible fieldset': {
+                border: `2px solid ${COLOR__PRIMARY} !important`,
+              },
+              '& .MuiInputBase-root.Mui-disabled': {
+                backgroundColor: COLOR__BACK,
+              },
+              // Stuff necessary for placing label above TextField (outside)
+              // https://github.com/mui/material-ui/issues/30379#issuecomment-1175806105
+              '& legend': {display: 'none'},
+            },
+          },
+        ],
+      },
+      MuiInputLabel: {
+        defaultProps: {
+          shrink: true,
+        },
+        styleOverrides: {
+          root: {
+            color: `${COLOR__MAIN_BLACK} !important`,
+            fontSize: 14,
+            fontWeight: 400,
+            lineHeight: '16px',
+          },
+          // Stuff necessary for placing label above TextField (outside)
+          // https://github.com/mui/material-ui/issues/30379#issuecomment-1175806105
+          shrink: {
+            transform: 'translate(0px, -20px) scale(1) !important',
+          },
+        },
+      },
       // MuiFormHelperText: {
       //   styleOverrides: {
       //     root: {
