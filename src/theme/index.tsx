@@ -55,32 +55,30 @@ const theme = createTheme(
       MuiButton: {
         defaultProps: {
           variant: 'contained',
+          disableRipple: true,
         },
-        // styleOverrides: {
-        //   root: ({ownerState}) => ({
-        //     gap: theme.spacing(1),
-        //     ...(ownerState.variant === 'contained' && {
-        //       '&.Mui-disabled': {
-        //         background: COLOR__BG_2,
-        //         color: COLOR__BG_6,
-        //       },
-        //     }),
-        //   }),
-        //   sizeLarge: {
-        //     padding: '16px 20px',
-        //     // titleMedium typography variant
-        //     fontSize: 15,
-        //     fontWeight: 500,
-        //     lineHeight: '20px',
-        //   },
-        //   sizeMedium: {
-        //     padding: 12,
-        //     // label2 typography variant
-        //     fontSize: 14,
-        //     fontWeight: 400,
-        //     lineHeight: '16px',
-        //   },
-        // },
+        styleOverrides: {
+          root: ({ownerState}) => ({
+            borderRadius: 15,
+            ...(ownerState.variant === 'contained' && {
+              '&:hover': {
+                backgroundColor: '#FFA806',
+              },
+              '&:active': {
+                backgroundColor: '#FFA806',
+              },
+              // Вариант из Фигмы закомментарен, т.к. меньше нравится
+              // '&.Mui-disabled': {
+              //   opacity: 0.2,
+              //   backgroundColor: COLOR__LINE,
+              //   color: COLOR__MAIN_BLACK,
+              // },
+            }),
+          }),
+          sizeMedium: {
+            padding: '14px 32px',
+          },
+        },
       },
       // MuiTextField: {
       //   variants: [
