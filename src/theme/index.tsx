@@ -129,13 +129,13 @@ const theme = createTheme(
           root: {
             color: `${COLOR__MAIN_BLACK} !important`,
             fontSize: 14,
-            fontWeight: 400,
-            lineHeight: '16px',
+            fontWeight: 500,
+            lineHeight: '18px',
           },
           // Stuff necessary for placing label above TextField (outside)
           // https://github.com/mui/material-ui/issues/30379#issuecomment-1175806105
           shrink: {
-            transform: 'translate(0px, -20px) scale(1) !important',
+            transform: 'translate(0px, -24px) scale(1) !important',
           },
         },
       },
