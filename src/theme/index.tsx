@@ -139,15 +139,16 @@ const theme = createTheme(
           },
         },
       },
-      // MuiFormHelperText: {
-      //   styleOverrides: {
-      //     root: {
-      //       marginLeft: 0,
-      //       fontSize: 12,
-      //       fontWeight: 400,
-      //     },
-      //   },
-      // },
+      MuiFormHelperText: {
+        styleOverrides: {
+          root: {
+            fontSize: 14,
+            fontWeight: 400,
+            lineHeight: '18px',
+            color: '#E05225 !important',
+          },
+        },
+      },
       MuiTypography: {
         defaultProps: {
           variant: 'b1regular',
