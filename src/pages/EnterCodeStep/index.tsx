@@ -42,7 +42,6 @@ export const EnterCodeStep = () => {
             name={'code'}
             label={'Введите код'}
             control={control}
-            required
             fullWidth
           />
           {error && <ErrorMessage error={error} />}

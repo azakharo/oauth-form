@@ -41,7 +41,6 @@ export const EnterPasswordStep = () => {
             name={'password'}
             label={'Пароль'}
             control={control}
-            required
             fullWidth
           />
           {error && <ErrorMessage error={error} />}

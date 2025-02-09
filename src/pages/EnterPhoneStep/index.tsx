@@ -41,7 +41,6 @@ export const EnterPhoneStep = () => {
             name={'phone'}
             label={'Номер телефона'}
             control={control}
-            required
             fullWidth
           />
           {error && <ErrorMessage error={error} />}
