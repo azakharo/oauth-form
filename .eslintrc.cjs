@@ -11,7 +11,6 @@ module.exports = {
     'plugin:@typescript-eslint/recommended',
     'plugin:@typescript-eslint/recommended-requiring-type-checking',
     'plugin:eslint-comments/recommended',
-    'plugin:jest/recommended',
     'plugin:promise/recommended',
     'plugin:unicorn/recommended',
     'prettier',
@@ -21,7 +20,6 @@ module.exports = {
     'eslint-comments',
     'simple-import-sort',
     'import',
-    'jest',
     'jsx-a11y',
     'promise',
     'react',
@@ -32,7 +30,6 @@ module.exports = {
   env: {
     node: true,
     browser: true,
-    jest: true,
   },
   settings: {
     react: {
@@ -136,23 +133,12 @@ module.exports = {
         '**/*.spec.jsx',
         '**/*.spec.tsx',
       ],
-      env: {
-        jest: true,
-      },
     },
     {
       files: ['*.js'],
       rules: {
         // Allow `require()`
         '@typescript-eslint/no-var-requires': 'off',
-      },
-    },
-    /////////////////////////////////////////////
-    // Integration test may have no any expect()
-    {
-      files: ['*.spec.tsx', 'spec.tsx'],
-      rules: {
-        'jest/expect-expect': 'off',
       },
     },
     /////////////////////////////////////////////

@@ -1,5 +1,6 @@
-import {axi} from './axiosSetup';
 import {AxiosResponse} from 'axios';
+
+import {axi} from './axiosSetup';
 
 // Returns token which can be used to enter SMS code
 export const enterPhone = async (phone: string): Promise<string> => {

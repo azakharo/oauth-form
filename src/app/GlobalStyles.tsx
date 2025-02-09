@@ -1,4 +1,5 @@
 import MuiGlobalStyles from '@mui/material/GlobalStyles';
+
 import {fontFamilyAdditional, fontFamilyMain} from '@/theme/typography';
 
 const GlobalStyles = (): JSX.Element => {

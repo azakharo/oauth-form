@@ -1,5 +1,6 @@
 import {FC, PropsWithChildren} from 'react';
 import {Box, Container, Typography} from '@mui/material';
+
 import Logo from './logo.svg?react';
 
 interface Props {

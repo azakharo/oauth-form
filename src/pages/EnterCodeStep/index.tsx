@@ -1,13 +1,14 @@
-import {Button, Stack} from '@mui/material';
 import {useForm} from 'react-hook-form';
 import {TextFieldElement} from 'react-hook-form-mui';
 import {useNavigate} from 'react-router-dom';
-import {ROUTE__ENTER_PASSWORD_STEP} from '@/constants';
-import {useAuthData} from '@/contexts/AuthDataContext';
-import {StepPageLayout} from '@/components/StepPageLayout';
+import {Button, Stack} from '@mui/material';
 import useRequest from 'ahooks/es/useRequest';
+
 import {enterSmsCode} from '@/api';
 import {ErrorMessage} from '@/components/ErrorMessage';
+import {StepPageLayout} from '@/components/StepPageLayout';
+import {ROUTE__ENTER_PASSWORD_STEP} from '@/constants';
+import {useAuthData} from '@/contexts/AuthDataContext';
 import {COLOR__ERROR} from '@/theme/colors';
 
 export const EnterCodeStep = () => {
@@ -33,9 +34,13 @@ export const EnterCodeStep = () => {
   return (
     <StepPageLayout title="Введите код">
       <form
-        onSubmit={handleSubmit(values => {
-          run(values.code, tokenToEnterSmsCode);
-        })}
+        onSubmit={event => {
+          const theReturnedFunc = handleSubmit(values => {
+            run(values.code, tokenToEnterSmsCode);
+          });
+
+          void theReturnedFunc(event);
+        }}
         noValidate
       >
         <Stack spacing={2}>

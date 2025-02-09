@@ -1,11 +1,12 @@
-import {Button, Stack} from '@mui/material';
 import {useForm} from 'react-hook-form';
 import {TextFieldElement} from 'react-hook-form-mui';
-import {useAuthData} from '@/contexts/AuthDataContext';
-import {StepPageLayout} from '@/components/StepPageLayout';
+import {Button, Stack} from '@mui/material';
 import useRequest from 'ahooks/es/useRequest';
+
 import {enterPassword} from '@/api';
 import {ErrorMessage} from '@/components/ErrorMessage';
+import {StepPageLayout} from '@/components/StepPageLayout';
+import {useAuthData} from '@/contexts/AuthDataContext';
 import {COLOR__ERROR} from '@/theme/colors';
 
 export const EnterPasswordStep = () => {
@@ -32,9 +33,13 @@ export const EnterPasswordStep = () => {
   return (
     <StepPageLayout title="Введите пароль">
       <form
-        onSubmit={handleSubmit(values => {
-          run(values.password, tokenToEnterPassword);
-        })}
+        onSubmit={event => {
+          const theReturnedFunc = handleSubmit(values => {
+            run(values.password, tokenToEnterPassword);
+          });
+
+          void theReturnedFunc(event);
+        }}
         noValidate
       >
         <Stack spacing={2}>
