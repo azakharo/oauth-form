@@ -8,6 +8,7 @@ import {StepPageLayout} from '@/components/StepPageLayout';
 import useRequest from 'ahooks/es/useRequest';
 import {enterPhone} from '@/api';
 import {ErrorMessage} from '@/components/ErrorMessage';
+import {COLOR__ERROR} from '@/theme/colors';
 
 export const EnterPhoneStep = () => {
   const navigate = useNavigate();
@@ -42,6 +43,11 @@ export const EnterPhoneStep = () => {
             label={'Номер телефона'}
             control={control}
             fullWidth
+            sx={{
+              fieldset: {
+                borderColor: error ? COLOR__ERROR : undefined,
+              },
+            }}
           />
           {error && <ErrorMessage error={error} />}
 

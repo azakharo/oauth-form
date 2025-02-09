@@ -8,6 +8,7 @@ import {StepPageLayout} from '@/components/StepPageLayout';
 import useRequest from 'ahooks/es/useRequest';
 import {enterSmsCode} from '@/api';
 import {ErrorMessage} from '@/components/ErrorMessage';
+import {COLOR__ERROR} from '@/theme/colors';
 
 export const EnterCodeStep = () => {
   const navigate = useNavigate();
@@ -43,6 +44,11 @@ export const EnterCodeStep = () => {
             label={'Введите код'}
             control={control}
             fullWidth
+            sx={{
+              fieldset: {
+                borderColor: error ? COLOR__ERROR : undefined,
+              },
+            }}
           />
           {error && <ErrorMessage error={error} />}
 

@@ -6,6 +6,7 @@ import {StepPageLayout} from '@/components/StepPageLayout';
 import useRequest from 'ahooks/es/useRequest';
 import {enterPassword} from '@/api';
 import {ErrorMessage} from '@/components/ErrorMessage';
+import {COLOR__ERROR} from '@/theme/colors';
 
 export const EnterPasswordStep = () => {
   const {password, setPassword, tokenToEnterPassword, setTokenToGetGrants} =
@@ -42,6 +43,11 @@ export const EnterPasswordStep = () => {
             label={'Пароль'}
             control={control}
             fullWidth
+            sx={{
+              fieldset: {
+                borderColor: error ? COLOR__ERROR : undefined,
+              },
+            }}
           />
           {error && <ErrorMessage error={error} />}
 

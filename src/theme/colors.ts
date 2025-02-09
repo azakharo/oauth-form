@@ -13,7 +13,7 @@ export const COLOR__OFF_WHITE = COLOR__WHITE;
 // Main colors
 export const COLOR__PRIMARY = '#FFC106';
 export const COLOR__SECONDARY = '#003C96';
-export const COLOR__ERROR = '#DA1136';
+export const COLOR__ERROR = '#E05225';
 export const COLOR__WARNING = '#FE8414';
 export const COLOR__INFO = '#31A6E6'; // not used in Figma
 export const COLOR__SUCCESS = '#58B80D';
