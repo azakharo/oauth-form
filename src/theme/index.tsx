@@ -89,17 +89,13 @@ const theme = createTheme(
             props: {variant: 'outlined'},
             style: {
               '& input': {
-                padding: '16px 10px',
-                // fontSize: 15,
-                // fontWeight: 400,
-                // lineHeight: '20px',
+                padding: '10px 16px',
+                lineHeight: '20.5px',
+                color: COLOR__MAIN_BLACK,
               },
               '& input::placeholder': {
-                color: COLOR__PRIMARY,
-                // fontSize: 15,
-                // fontWeight: 400,
-                // lineHeight: '20px',
-                // opacity: 1,
+                color: COLOR__LIGHT_GRAY,
+                lineHeight: '20.5px',
               },
               border: 'none',
               '& fieldset': {
@@ -113,7 +109,7 @@ const theme = createTheme(
                 border: `1px solid ${COLOR__LIGHT_GRAY} !important`,
               },
               '&:focus-within fieldset, &:focus-visible fieldset': {
-                border: `2px solid ${COLOR__PRIMARY} !important`,
+                border: `1px solid ${COLOR__PRIMARY} !important`,
               },
               '& .MuiInputBase-root.Mui-disabled': {
                 backgroundColor: COLOR__BACK,
