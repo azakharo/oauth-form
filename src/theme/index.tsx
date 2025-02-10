@@ -19,6 +19,19 @@ import {
 } from './colors';
 import typography from './typography';
 
+declare module '@mui/material/styles' {
+  interface BreakpointOverrides {
+    xs: false; // removes the `xs` breakpoint
+    sm: false;
+    md: false;
+    lg: false;
+    xl: false;
+    mobile: true; // adds the `mobile` breakpoint
+    tablet: true;
+    desktop: true;
+  }
+}
+
 const theme = createTheme(
   {
     palette: {
@@ -47,6 +60,13 @@ const theme = createTheme(
         primary: COLOR__TEXT_PRIMARY,
         secondary: COLOR__TEXT_SECONDARY,
         disabled: COLOR__TEXT_DISABLED,
+      },
+    },
+    breakpoints: {
+      values: {
+        mobile: 0,
+        tablet: 768,
+        desktop: 1440,
       },
     },
     components: {
