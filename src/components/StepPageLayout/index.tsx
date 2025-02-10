@@ -1,6 +1,7 @@
 import {FC, PropsWithChildren} from 'react';
 import {Box, Typography} from '@mui/material';
 
+import catImage from './cat.png';
 import Logo from './logo.svg?react';
 
 import {useIsDesktop} from '@/hooks/responsive';
@@ -40,9 +41,15 @@ export const StepPageLayout: FC<PropsWithChildren<Props>> = ({
   if (isDesktop) {
     return (
       <Box display="flex" sx={{height: '100dvh'}}>
-        <Box flex="1 1 0" sx={{backgroundColor: 'green'}}>
-          1
-        </Box>
+        <Box
+          flex="1 1 0"
+          sx={{
+            backgroundImage: `url(${catImage})`,
+            backgroundPosition: 'center',
+            backgroundRepeat: 'no-repeat',
+            backgroundSize: 'cover',
+          }}
+        ></Box>
 
         <Box
           flex="1 1 0"
