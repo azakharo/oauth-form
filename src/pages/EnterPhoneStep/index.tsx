@@ -10,7 +10,6 @@ import {object, string} from 'yup';
 import {PhoneFormat} from './PhoneFormat';
 
 import {enterPhone} from '@/api';
-import {ErrorMessage} from '@/components/ErrorMessage';
 import {StepPageLayout} from '@/components/StepPageLayout';
 import {ROUTE__ENTER_CODE_STEP} from '@/constants';
 import {useAuthData} from '@/contexts/AuthDataContext';
@@ -28,13 +27,7 @@ export const EnterPhoneStep = () => {
   const navigate = useNavigate();
   const {phone, setPhone, setTokenToEnterSmsCode} = useAuthData();
 
-  const {
-    control,
-    handleSubmit,
-    reset,
-    setValue,
-    formState: {isDirty},
-  } = useForm({
+  const {control, handleSubmit, setValue, setError} = useForm({
     mode: 'onBlur',
     resolver: yupResolver(v8nSchema),
     defaultValues: {
@@ -49,9 +42,8 @@ export const EnterPhoneStep = () => {
       setTokenToEnterSmsCode(token);
       navigate(ROUTE__ENTER_CODE_STEP);
     },
-    onError: () => {
-      // Reset dirty state
-      reset({phone: params[0] as string});
+    onError: err => {
+      setError('phone', {type: 'custom', message: err.message});
     },
   });
 
@@ -102,7 +94,6 @@ export const EnterPhoneStep = () => {
             }}
             autoFocus
           />
-          {error && !isDirty && <ErrorMessage error={error} />}
 
           <Button
             type={'submit'}
