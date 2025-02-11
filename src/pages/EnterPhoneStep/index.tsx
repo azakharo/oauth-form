@@ -53,6 +53,10 @@ export const EnterPhoneStep = () => {
                 borderColor: error ? COLOR__ERROR : undefined,
               },
             }}
+            InputProps={{
+              type: 'tel',
+            }}
+            autoFocus
           />
           {error && <ErrorMessage error={error} />}
 

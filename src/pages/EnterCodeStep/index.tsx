@@ -54,6 +54,7 @@ export const EnterCodeStep = () => {
                 borderColor: error ? COLOR__ERROR : undefined,
               },
             }}
+            autoFocus
           />
           {error && <ErrorMessage error={error} />}
 

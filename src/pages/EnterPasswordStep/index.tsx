@@ -53,6 +53,7 @@ export const EnterPasswordStep = () => {
                 borderColor: error ? COLOR__ERROR : undefined,
               },
             }}
+            autoFocus
           />
           {error && <ErrorMessage error={error} />}
 
