@@ -2,7 +2,8 @@ import {useForm} from 'react-hook-form';
 import {TextFieldElement} from 'react-hook-form-mui';
 import {useNavigate} from 'react-router-dom';
 import {yupResolver} from '@hookform/resolvers/yup';
-import {Button, Stack} from '@mui/material';
+import ClearOutlinedIcon from '@mui/icons-material/ClearOutlined';
+import {Button, IconButton, Stack} from '@mui/material';
 import useRequest from 'ahooks/es/useRequest';
 import {object, string} from 'yup';
 
@@ -13,7 +14,7 @@ import {ErrorMessage} from '@/components/ErrorMessage';
 import {StepPageLayout} from '@/components/StepPageLayout';
 import {ROUTE__ENTER_CODE_STEP} from '@/constants';
 import {useAuthData} from '@/contexts/AuthDataContext';
-import {COLOR__ERROR} from '@/theme/colors';
+import {COLOR__ERROR, COLOR__MAIN_BLACK} from '@/theme/colors';
 
 const phoneRegExp = /^\d{10}$/;
 
@@ -27,7 +28,7 @@ export const EnterPhoneStep = () => {
   const navigate = useNavigate();
   const {phone, setPhone, setTokenToEnterSmsCode} = useAuthData();
 
-  const {control, handleSubmit} = useForm({
+  const {control, handleSubmit, setValue} = useForm({
     mode: 'onBlur',
     resolver: yupResolver(v8nSchema),
     defaultValues: {
@@ -73,6 +74,21 @@ export const EnterPhoneStep = () => {
               // eslint-disable-next-line @typescript-eslint/ban-ts-comment
               // @ts-ignore
               inputComponent: PhoneFormat,
+              endAdornment: (
+                <IconButton
+                  size="small"
+                  onClick={() => {
+                    setValue('phone', '');
+                  }}
+                >
+                  <ClearOutlinedIcon
+                    sx={{
+                      fontSize: 16,
+                      fill: COLOR__MAIN_BLACK,
+                    }}
+                  />
+                </IconButton>
+              ),
             }}
             autoFocus
           />
