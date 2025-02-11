@@ -28,7 +28,13 @@ export const EnterPhoneStep = () => {
   const navigate = useNavigate();
   const {phone, setPhone, setTokenToEnterSmsCode} = useAuthData();
 
-  const {control, handleSubmit, setValue} = useForm({
+  const {
+    control,
+    handleSubmit,
+    reset,
+    setValue,
+    formState: {isDirty},
+  } = useForm({
     mode: 'onBlur',
     resolver: yupResolver(v8nSchema),
     defaultValues: {
@@ -42,6 +48,10 @@ export const EnterPhoneStep = () => {
       setPhone(params[0] as string);
       setTokenToEnterSmsCode(token);
       navigate(ROUTE__ENTER_CODE_STEP);
+    },
+    onError: () => {
+      // Reset dirty state
+      reset({phone: params[0] as string});
     },
   });
 
@@ -92,7 +102,7 @@ export const EnterPhoneStep = () => {
             }}
             autoFocus
           />
-          {error && <ErrorMessage error={error} />}
+          {error && !isDirty && <ErrorMessage error={error} />}
 
           <Button
             type={'submit'}
