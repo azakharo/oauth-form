@@ -15,8 +15,12 @@ import {ROUTE__ENTER_CODE_STEP} from '@/constants';
 import {useAuthData} from '@/contexts/AuthDataContext';
 import {COLOR__ERROR} from '@/theme/colors';
 
+const phoneRegExp = /^\d{10}$/;
+
 const v8nSchema = object().shape({
-  phone: string().required('Введите номер телефона'),
+  phone: string()
+    .required('Введите номер телефона')
+    .matches(phoneRegExp, 'Недопустимый номер телефона'),
 });
 
 export const EnterPhoneStep = () => {
@@ -24,6 +28,7 @@ export const EnterPhoneStep = () => {
   const {phone, setPhone, setTokenToEnterSmsCode} = useAuthData();
 
   const {control, handleSubmit} = useForm({
+    mode: 'onBlur',
     resolver: yupResolver(v8nSchema),
     defaultValues: {
       phone,
