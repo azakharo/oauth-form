@@ -4,6 +4,8 @@ import {useNavigate} from 'react-router-dom';
 import {Button, Stack} from '@mui/material';
 import useRequest from 'ahooks/es/useRequest';
 
+import {CodeFormat} from './CodeFormat';
+
 import {enterSmsCode} from '@/api';
 import {ErrorMessage} from '@/components/ErrorMessage';
 import {StepPageLayout} from '@/components/StepPageLayout';
@@ -53,6 +55,14 @@ export const EnterCodeStep = () => {
               fieldset: {
                 borderColor: error ? COLOR__ERROR : undefined,
               },
+            }}
+            inputProps={{
+              autoComplete: 'one-time-code',
+            }}
+            InputProps={{
+              // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+              // @ts-ignore
+              inputComponent: CodeFormat,
             }}
             autoFocus
           />
