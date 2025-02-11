@@ -5,11 +5,9 @@ import useRequest from 'ahooks/es/useRequest';
 import {object, string} from 'yup';
 
 import {enterPassword} from '@/api';
-import {ErrorMessage} from '@/components/ErrorMessage';
 import PasswordInput from '@/components/PasswordInput';
 import {StepPageLayout} from '@/components/StepPageLayout';
 import {useAuthData} from '@/contexts/AuthDataContext';
-import {COLOR__ERROR} from '@/theme/colors';
 
 const v8nSchema = object().shape({
   password: string().required('Введите пароль'),
@@ -19,7 +17,7 @@ export const EnterPasswordStep = () => {
   const {password, setPassword, tokenToEnterPassword, setTokenToGetGrants} =
     useAuthData();
 
-  const {control, handleSubmit} = useForm({
+  const {control, handleSubmit, setError} = useForm({
     mode: 'onBlur',
     resolver: yupResolver(v8nSchema),
     defaultValues: {
@@ -27,7 +25,7 @@ export const EnterPasswordStep = () => {
     },
   });
 
-  const {loading, error, run, params} = useRequest(enterPassword, {
+  const {loading, run, params} = useRequest(enterPassword, {
     manual: true,
     onSuccess: token => {
       setPassword(params[0] as string);
@@ -35,6 +33,9 @@ export const EnterPasswordStep = () => {
       alert(
         `The password has been successfully sent. The backend returned token "${token}"`,
       );
+    },
+    onError: err => {
+      setError('password', {type: 'custom', message: err.message});
     },
   });
 
@@ -56,15 +57,9 @@ export const EnterPasswordStep = () => {
             label={'Пароль'}
             control={control}
             fullWidth
-            sx={{
-              fieldset: {
-                borderColor: error ? COLOR__ERROR : undefined,
-              },
-            }}
             autoFocus
             autoComplete="current-password"
           />
-          {error && <ErrorMessage error={error} />}
 
           <Button
             type={'submit'}

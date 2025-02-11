@@ -6,7 +6,9 @@ import ShowHidePasswordButton from './ShowHidePasswordButton';
 const PasswordInput: FC<TextFieldElementProps> = props => {
   const [showPassword, setShowPassword] = useState(false);
 
-  const handleClickShowPassword = () => setShowPassword(show => !show);
+  const handleClickShowPassword = () => {
+    setShowPassword(show => !show);
+  };
 
   return (
     <TextFieldElement
