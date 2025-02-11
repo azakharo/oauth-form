@@ -1,8 +1,10 @@
 import {useForm} from 'react-hook-form';
 import {TextFieldElement} from 'react-hook-form-mui';
 import {useNavigate} from 'react-router-dom';
+import {yupResolver} from '@hookform/resolvers/yup';
 import {Button, Stack} from '@mui/material';
 import useRequest from 'ahooks/es/useRequest';
+import {object, string} from 'yup';
 
 import {CodeFormat} from './CodeFormat';
 
@@ -13,12 +15,22 @@ import {ROUTE__ENTER_PASSWORD_STEP} from '@/constants';
 import {useAuthData} from '@/contexts/AuthDataContext';
 import {COLOR__ERROR} from '@/theme/colors';
 
+const codeRegExp = /^\d{4}$/;
+
+const v8nSchema = object().shape({
+  code: string()
+    .required('Введите код из СМС')
+    .matches(codeRegExp, 'СМС код состоит из 4-х цифр'),
+});
+
 export const EnterCodeStep = () => {
   const navigate = useNavigate();
   const {code, setCode, tokenToEnterSmsCode, setTokenToEnterPassword} =
     useAuthData();
 
   const {control, handleSubmit} = useForm({
+    mode: 'onBlur',
+    resolver: yupResolver(v8nSchema),
     defaultValues: {
       code,
     },
