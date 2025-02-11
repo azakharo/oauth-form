@@ -1,8 +1,10 @@
 import {useForm} from 'react-hook-form';
 import {TextFieldElement} from 'react-hook-form-mui';
 import {useNavigate} from 'react-router-dom';
+import {yupResolver} from '@hookform/resolvers/yup';
 import {Button, Stack} from '@mui/material';
 import useRequest from 'ahooks/es/useRequest';
+import {object, string} from 'yup';
 
 import {PhoneFormat} from './PhoneFormat';
 
@@ -13,11 +15,16 @@ import {ROUTE__ENTER_CODE_STEP} from '@/constants';
 import {useAuthData} from '@/contexts/AuthDataContext';
 import {COLOR__ERROR} from '@/theme/colors';
 
+const v8nSchema = object().shape({
+  phone: string().required('Введите номер телефона'),
+});
+
 export const EnterPhoneStep = () => {
   const navigate = useNavigate();
   const {phone, setPhone, setTokenToEnterSmsCode} = useAuthData();
 
   const {control, handleSubmit} = useForm({
+    resolver: yupResolver(v8nSchema),
     defaultValues: {
       phone,
     },

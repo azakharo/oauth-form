@@ -162,6 +162,8 @@ const theme = createTheme(
       MuiFormHelperText: {
         styleOverrides: {
           root: {
+            // align v8n message to the left edge of input
+            marginLeft: 0,
             fontSize: 14,
             fontWeight: 400,
             lineHeight: '18px',
