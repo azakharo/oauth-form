@@ -4,6 +4,8 @@ import {useNavigate} from 'react-router-dom';
 import {Button, Stack} from '@mui/material';
 import useRequest from 'ahooks/es/useRequest';
 
+import {PhoneFormat} from './PhoneFormat';
+
 import {enterPhone} from '@/api';
 import {ErrorMessage} from '@/components/ErrorMessage';
 import {StepPageLayout} from '@/components/StepPageLayout';
@@ -35,7 +37,8 @@ export const EnterPhoneStep = () => {
       <form
         onSubmit={event => {
           const theReturnedFunc = handleSubmit(values => {
-            run(values.phone);
+            // +7 пользователь не вводит, но на бэкенд 7-ку передавать надо
+            run(`7${values.phone}`);
           });
 
           void theReturnedFunc(event);
@@ -55,6 +58,9 @@ export const EnterPhoneStep = () => {
             }}
             InputProps={{
               type: 'tel',
+              // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+              // @ts-ignore
+              inputComponent: PhoneFormat,
             }}
             autoFocus
           />
