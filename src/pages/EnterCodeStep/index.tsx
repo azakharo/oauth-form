@@ -9,7 +9,6 @@ import {object, string} from 'yup';
 import {CodeFormat} from './CodeFormat';
 
 import {enterSmsCode} from '@/api';
-import {ErrorMessage} from '@/components/ErrorMessage';
 import {StepPageLayout} from '@/components/StepPageLayout';
 import {ROUTE__ENTER_PASSWORD_STEP} from '@/constants';
 import {useAuthData} from '@/contexts/AuthDataContext';
@@ -28,7 +27,7 @@ export const EnterCodeStep = () => {
   const {code, setCode, tokenToEnterSmsCode, setTokenToEnterPassword} =
     useAuthData();
 
-  const {control, handleSubmit} = useForm({
+  const {control, handleSubmit, setError} = useForm({
     mode: 'onBlur',
     resolver: yupResolver(v8nSchema),
     defaultValues: {
@@ -42,6 +41,9 @@ export const EnterCodeStep = () => {
       setCode(params[0] as string);
       setTokenToEnterPassword(token);
       navigate(ROUTE__ENTER_PASSWORD_STEP);
+    },
+    onError: err => {
+      setError('code', {type: 'custom', message: err.message});
     },
   });
 
@@ -78,7 +80,6 @@ export const EnterCodeStep = () => {
             }}
             autoFocus
           />
-          {error && <ErrorMessage error={error} />}
 
           <Button
             type={'submit'}
