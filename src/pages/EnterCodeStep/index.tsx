@@ -12,7 +12,6 @@ import {enterSmsCode} from '@/api';
 import {StepPageLayout} from '@/components/StepPageLayout';
 import {ROUTE__ENTER_PASSWORD_STEP} from '@/constants';
 import {useAuthData} from '@/contexts/AuthDataContext';
-import {COLOR__ERROR} from '@/theme/colors';
 
 const codeRegExp = /^\d{4}$/;
 
@@ -35,7 +34,7 @@ export const EnterCodeStep = () => {
     },
   });
 
-  const {loading, error, run, params} = useRequest(enterSmsCode, {
+  const {loading, run, params} = useRequest(enterSmsCode, {
     manual: true,
     onSuccess: token => {
       setCode(params[0] as string);
@@ -65,11 +64,6 @@ export const EnterCodeStep = () => {
             label={'Введите код'}
             control={control}
             fullWidth
-            sx={{
-              fieldset: {
-                borderColor: error ? COLOR__ERROR : undefined,
-              },
-            }}
             inputProps={{
               autoComplete: 'one-time-code',
             }}

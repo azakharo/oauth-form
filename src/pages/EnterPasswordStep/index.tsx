@@ -1,19 +1,27 @@
 import {useForm} from 'react-hook-form';
-import {TextFieldElement} from 'react-hook-form-mui';
+import {yupResolver} from '@hookform/resolvers/yup';
 import {Button, Stack} from '@mui/material';
 import useRequest from 'ahooks/es/useRequest';
+import {object, string} from 'yup';
 
 import {enterPassword} from '@/api';
 import {ErrorMessage} from '@/components/ErrorMessage';
+import PasswordInput from '@/components/PasswordInput';
 import {StepPageLayout} from '@/components/StepPageLayout';
 import {useAuthData} from '@/contexts/AuthDataContext';
 import {COLOR__ERROR} from '@/theme/colors';
+
+const v8nSchema = object().shape({
+  password: string().required('Введите пароль'),
+});
 
 export const EnterPasswordStep = () => {
   const {password, setPassword, tokenToEnterPassword, setTokenToGetGrants} =
     useAuthData();
 
   const {control, handleSubmit} = useForm({
+    mode: 'onBlur',
+    resolver: yupResolver(v8nSchema),
     defaultValues: {
       password,
     },
@@ -43,7 +51,7 @@ export const EnterPasswordStep = () => {
         noValidate
       >
         <Stack spacing={2}>
-          <TextFieldElement
+          <PasswordInput
             name={'password'}
             label={'Пароль'}
             control={control}
@@ -54,6 +62,7 @@ export const EnterPasswordStep = () => {
               },
             }}
             autoFocus
+            autoComplete="current-password"
           />
           {error && <ErrorMessage error={error} />}
 

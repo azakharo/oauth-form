@@ -13,7 +13,7 @@ import {enterPhone} from '@/api';
 import {StepPageLayout} from '@/components/StepPageLayout';
 import {ROUTE__ENTER_CODE_STEP} from '@/constants';
 import {useAuthData} from '@/contexts/AuthDataContext';
-import {COLOR__ERROR, COLOR__MAIN_BLACK} from '@/theme/colors';
+import {COLOR__MAIN_BLACK} from '@/theme/colors';
 
 const phoneRegExp = /^\d{10}$/;
 
@@ -35,7 +35,7 @@ export const EnterPhoneStep = () => {
     },
   });
 
-  const {loading, error, run, params} = useRequest(enterPhone, {
+  const {loading, run, params} = useRequest(enterPhone, {
     manual: true,
     onSuccess: token => {
       setPhone(params[0] as string);
@@ -66,11 +66,6 @@ export const EnterPhoneStep = () => {
             label={'Номер телефона'}
             control={control}
             fullWidth
-            sx={{
-              fieldset: {
-                borderColor: error ? COLOR__ERROR : undefined,
-              },
-            }}
             InputProps={{
               type: 'tel',
               // eslint-disable-next-line @typescript-eslint/ban-ts-comment
