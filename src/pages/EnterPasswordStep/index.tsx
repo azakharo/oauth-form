@@ -55,6 +55,8 @@ export const EnterPasswordStep = () => {
           <PasswordInput
             name={'password'}
             label={'Пароль'}
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-ignore
             control={control}
             fullWidth
             autoFocus
