@@ -55,6 +55,11 @@ export const EnterPasswordStep = () => {
           <PasswordInput
             name={'password'}
             label={'Пароль'}
+            // Technically all work fine.
+            // If replace PasswordInput (which is TextFieldElement) with TextFieldElement,
+            // then will be no any TS error.
+            // Looks like PasswordInput should be Generic with FormValues type param.
+            // But don't want to spend time for this.
             // eslint-disable-next-line @typescript-eslint/ban-ts-comment
             // @ts-ignore
             control={control}
