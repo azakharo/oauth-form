@@ -2,8 +2,12 @@
 
 ## Полезные ссылки
 
+* [Figma mockup](https://www.figma.com/design/5UrARVqMLyo9AMtXAFA8CK/%D0%9B%D0%B5%D0%BD%D1%82%D0%B0-(%D0%B7%D0%B0%D0%B4%D0%B0%D1%87%D0%B8)?node-id=7493-3306&t=MkcILWfCXbOg8skx-0)
+* [Task in Jira with the requirements and API description](https://asdcor.atlassian.net/browse/LM-2171)
+* [Demo on vercel](https://oauth-form.vercel.app/)
 
-## Quick start
+
+## Quick start for the development
 
 First install dependencies:
 
@@ -20,7 +24,7 @@ npm start
 That command opens http://localhost:4000 page in your browser.
 
 
-To create a production build:
+## Building the production version
 
 ```sh
 npm run build
@@ -33,8 +37,17 @@ To run the production build:
 npm run preview
 ```
 
-To run the tests:
+
+## Linting and type checking
+
+Run linting:
 
 ```sh
-npm test
+npm run lint
+```
+
+Run type checking:
+
+```sh
+npm run ts
 ```
