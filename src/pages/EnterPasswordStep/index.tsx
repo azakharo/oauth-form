@@ -60,6 +60,8 @@ export const EnterPasswordStep = () => {
             // then will be no any TS error.
             // Looks like PasswordInput should be Generic with FormValues type param.
             // But don't want to spend time for this.
+            // Probably the following link could help:
+            // https://github.com/react-hook-form/react-hook-form/issues/4965#issuecomment-826993553
             // eslint-disable-next-line @typescript-eslint/ban-ts-comment
             // @ts-ignore
             control={control}
