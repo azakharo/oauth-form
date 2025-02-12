@@ -56,3 +56,38 @@ export const enterPassword = async (
 
   return response.data.token;
 };
+
+export const getGrants = async (
+  appId: string,
+  token: string,
+): Promise<{
+  isAlreadyGranted: boolean;
+  grants: string[];
+}> => {
+  const response = await axi.get<{
+    already_granted: boolean;
+    grants: Array<{
+      fields: Array<{
+        value: string;
+      }>;
+    }>;
+  }>('/api/oauth/authorize', {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+    params: {
+      app_id: appId,
+    },
+  });
+
+  const data = response.data;
+  const backendGrants = data.grants;
+
+  return {
+    isAlreadyGranted: data.already_granted,
+    grants:
+      Array.isArray(backendGrants) && backendGrants.length > 0
+        ? backendGrants[0]!.fields.map(f => f.value)
+        : [],
+  };
+};
