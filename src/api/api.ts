@@ -91,3 +91,31 @@ export const getGrants = async (
         : [],
   };
 };
+
+export const getAuthCode = async (
+  appId: string,
+  token: string,
+): Promise<string> => {
+  const response = await axi.post<
+    {
+      app_id: string;
+      confirm: boolean;
+    },
+    AxiosResponse<{
+      auth_code: string;
+    }>
+  >(
+    '/api/oauth/authorize',
+    {
+      app_id: appId,
+      confirm: true,
+    },
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    },
+  );
+
+  return response.data.auth_code;
+};
