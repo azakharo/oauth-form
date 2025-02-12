@@ -2,12 +2,14 @@ import {AxiosResponse} from 'axios';
 
 import {axi} from './axiosSetup';
 
+const authPrefix = '/api/v0/auth';
+
 // Returns token which can be used to enter SMS code
 export const enterPhone = async (phone: string): Promise<string> => {
   const response = await axi.post<
     {phone: string},
     AxiosResponse<{token: string}>
-  >('/login/phone', {
+  >(`${authPrefix}/login/phone`, {
     phone,
   });
 
@@ -22,7 +24,7 @@ export const enterSmsCode = async (
   const response = await axi.post<
     {sms: string; token: string},
     AxiosResponse<{token: string}>
-  >('/login/phone/validate', {
+  >(`${authPrefix}/login/phone/validate`, {
     sms: code,
     token,
   });
@@ -41,7 +43,7 @@ export const enterPassword = async (
       token: string;
     }>
   >(
-    '/password',
+    `${authPrefix}/password`,
     {
       password,
     },

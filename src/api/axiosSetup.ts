@@ -4,7 +4,7 @@ import {isDevelopment} from '@/constants';
 
 export const axi = axios.create({
   // For development the proxying in the devserver is used
-  baseURL: (isDevelopment ? '' : import.meta.env.VITE_API_URL) + '/api/v0/auth',
+  baseURL: isDevelopment ? '' : import.meta.env.VITE_API_URL,
 });
 
 axi.interceptors.response.use(
