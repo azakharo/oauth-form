@@ -7,6 +7,8 @@ import React, {
 } from 'react';
 
 export interface ContextProps {
+  appId: string;
+
   phone: string;
   setPhone: (value: string) => void;
 
@@ -26,7 +28,11 @@ export interface ContextProps {
   setTokenToGetGrants: (value: string) => void;
 }
 
+// TODO appId must be taken from referrer
+const appId = 'MIF';
+
 export const AuthDataContext = createContext<ContextProps>({
+  appId: '',
   phone: '',
   setPhone: () => {},
   tokenToEnterSmsCode: '',
@@ -51,6 +57,7 @@ export const AuthDataProvider: FC<PropsWithChildren> = ({children}) => {
 
   const contextValue = useMemo(
     () => ({
+      appId,
       phone,
       setPhone,
       tokenToEnterSmsCode,
