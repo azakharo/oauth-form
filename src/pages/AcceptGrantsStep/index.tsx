@@ -1,4 +1,4 @@
-import {Button, List, ListItem, Stack, Typography} from '@mui/material';
+import {Alert, Button, List, ListItem, Stack, Typography} from '@mui/material';
 import useRequest from 'ahooks/es/useRequest';
 
 import {getGrants} from '@/api';
@@ -16,7 +16,7 @@ const textStyles = {
 export const AcceptGrantsStep = () => {
   const {appId, tokenToGetGrants} = useAuthData();
 
-  const {data: grantsData} = useRequest(
+  const {data: grantsData, error: errorGettingGrants} = useRequest(
     () => getGrants(appId, tokenToGetGrants),
     {
       onSuccess: ({grants, isAlreadyGranted}) => {
@@ -32,6 +32,14 @@ export const AcceptGrantsStep = () => {
       // },
     },
   );
+
+  if (errorGettingGrants) {
+    return (
+      <StepPageLayout title="Разрешить доступ">
+        <Alert severity="error">{errorGettingGrants.message}</Alert>
+      </StepPageLayout>
+    );
+  }
 
   // TODO negate
   if (grantsData && grantsData.isAlreadyGranted) {
