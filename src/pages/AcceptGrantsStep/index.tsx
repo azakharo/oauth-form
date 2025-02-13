@@ -1,4 +1,13 @@
-import {Alert, Button, List, ListItem, Stack, Typography} from '@mui/material';
+import {
+  Alert,
+  Box,
+  Button,
+  CircularProgress,
+  List,
+  ListItem,
+  Stack,
+  Typography,
+} from '@mui/material';
 import useRequest from 'ahooks/es/useRequest';
 
 import {getGrants} from '@/api';
@@ -16,22 +25,37 @@ const textStyles = {
 export const AcceptGrantsStep = () => {
   const {appId, tokenToGetGrants} = useAuthData();
 
-  const {data: grantsData, error: errorGettingGrants} = useRequest(
-    () => getGrants(appId, tokenToGetGrants),
-    {
-      onSuccess: ({grants, isAlreadyGranted}) => {
-        console.log({grants, isAlreadyGranted});
-        // setPassword(params[0] as string);
-        // setTokenToGetGrants(token);
-        // alert(
-        //   `The password has been successfully sent. The backend returned token "${token}"`,
-        // );
-      },
-      // onError: err => {
-      //   setError('password', {type: 'custom', message: err.message});
-      // },
+  const {
+    data: grantsData,
+    loading: isLoadingGrants,
+    error: errorGettingGrants,
+  } = useRequest(() => getGrants(appId, tokenToGetGrants), {
+    onSuccess: ({grants, isAlreadyGranted}) => {
+      console.log({grants, isAlreadyGranted});
+      // setPassword(params[0] as string);
+      // setTokenToGetGrants(token);
+      // alert(
+      //   `The password has been successfully sent. The backend returned token "${token}"`,
+      // );
     },
-  );
+    // onError: err => {
+    //   setError('password', {type: 'custom', message: err.message});
+    // },
+  });
+
+  if (isLoadingGrants) {
+    return (
+      <Box
+        display="flex"
+        justifyContent="center"
+        alignItems="center"
+        sx={{height: '100dvh'}}
+        p={4}
+      >
+        <CircularProgress color="secondary" />
+      </Box>
+    );
+  }
 
   if (errorGettingGrants) {
     return (
@@ -41,8 +65,7 @@ export const AcceptGrantsStep = () => {
     );
   }
 
-  // TODO negate
-  if (grantsData && grantsData.isAlreadyGranted) {
+  if (grantsData && !grantsData.isAlreadyGranted) {
     return (
       <StepPageLayout title="Разрешить доступ">
         <Stack spacing={2}>
