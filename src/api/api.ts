@@ -4,13 +4,15 @@ import {axi} from './axiosSetup';
 
 const authPrefix = '/api/v0/auth';
 
+// Phone number is passed without +7, just 10 digits
 // Returns token which can be used to enter SMS code
 export const enterPhone = async (phone: string): Promise<string> => {
   const response = await axi.post<
     {phone: string},
     AxiosResponse<{token: string}>
   >(`${authPrefix}/login/phone`, {
-    phone,
+    // +7 пользователь не вводит, но на бэкенд 7-ку передавать надо
+    phone: `7${phone}`,
   });
 
   return response.data.token;

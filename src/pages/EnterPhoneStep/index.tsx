@@ -52,8 +52,7 @@ export const EnterPhoneStep = () => {
       <form
         onSubmit={event => {
           const theReturnedFunc = handleSubmit(values => {
-            // +7 пользователь не вводит, но на бэкенд 7-ку передавать надо
-            run(`7${values.phone}`);
+            run(values.phone);
           });
 
           void theReturnedFunc(event);
