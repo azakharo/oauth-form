@@ -1,4 +1,5 @@
 import {useForm} from 'react-hook-form';
+import {useNavigate} from 'react-router-dom';
 import {yupResolver} from '@hookform/resolvers/yup';
 import {Button, Stack} from '@mui/material';
 import useRequest from 'ahooks/es/useRequest';
@@ -7,6 +8,7 @@ import {object, string} from 'yup';
 import {enterPassword} from '@/api';
 import PasswordInput from '@/components/PasswordInput';
 import {StepPageLayout} from '@/components/StepPageLayout';
+import {ROUTE__ACCEPT_GRANTS_STEP} from '@/constants';
 import {useAuthData} from '@/contexts/AuthDataContext';
 
 const v8nSchema = object().shape({
@@ -14,6 +16,7 @@ const v8nSchema = object().shape({
 });
 
 export const EnterPasswordStep = () => {
+  const navigate = useNavigate();
   const {password, setPassword, tokenToEnterPassword, setTokenToGetGrants} =
     useAuthData();
 
@@ -30,9 +33,7 @@ export const EnterPasswordStep = () => {
     onSuccess: token => {
       setPassword(params[0] as string);
       setTokenToGetGrants(token);
-      alert(
-        `The password has been successfully sent. The backend returned token "${token}"`,
-      );
+      navigate(ROUTE__ACCEPT_GRANTS_STEP);
     },
     onError: err => {
       setError('password', {type: 'custom', message: err.message});
