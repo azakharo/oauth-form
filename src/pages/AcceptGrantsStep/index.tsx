@@ -10,7 +10,7 @@ import {
 } from '@mui/material';
 import useRequest from 'ahooks/es/useRequest';
 
-import {getGrants} from '@/api';
+import {getAuthCode, getGrants} from '@/api';
 import {StepPageLayout} from '@/components/StepPageLayout';
 import {useAuthData} from '@/contexts/AuthDataContext';
 import {COLOR__SECONDARY} from '@/theme/colors';
@@ -26,21 +26,28 @@ export const AcceptGrantsStep = () => {
   const {appId, tokenToGetGrants} = useAuthData();
 
   const {
+    loading: isLoadingAuthCode,
+    run: runGettingAuthCode,
+    error: errorGettingAuthCode,
+  } = useRequest(getAuthCode, {
+    manual: true,
+    onSuccess: authCode => {
+      alert(
+        `От бэкенда получен auth code "${authCode}".\nДалее должен быть переход на callback url с передачей этого auth code.`,
+      );
+    },
+  });
+
+  const {
     data: grantsData,
     loading: isLoadingGrants,
     error: errorGettingGrants,
   } = useRequest(() => getGrants(appId, tokenToGetGrants), {
-    onSuccess: ({grants, isAlreadyGranted}) => {
-      console.log({grants, isAlreadyGranted});
-      // setPassword(params[0] as string);
-      // setTokenToGetGrants(token);
-      // alert(
-      //   `The password has been successfully sent. The backend returned token "${token}"`,
-      // );
+    onSuccess: ({isAlreadyGranted}) => {
+      if (isAlreadyGranted) {
+        runGettingAuthCode(appId, tokenToGetGrants);
+      }
     },
-    // onError: err => {
-    //   setError('password', {type: 'custom', message: err.message});
-    // },
   });
 
   if (isLoadingGrants) {
@@ -57,10 +64,11 @@ export const AcceptGrantsStep = () => {
     );
   }
 
-  if (errorGettingGrants) {
+  const error = errorGettingGrants || errorGettingAuthCode || null;
+  if (error) {
     return (
       <StepPageLayout title="Разрешить доступ">
-        <Alert severity="error">{errorGettingGrants.message}</Alert>
+        <Alert severity="error">{error.message}</Alert>
       </StepPageLayout>
     );
   }
@@ -86,14 +94,21 @@ export const AcceptGrantsStep = () => {
 
             <List sx={{listStyleType: 'disc', pl: 4}}>
               {grantsData.grants.map(grant => (
-                <ListItem sx={{display: 'list-item'}}>
+                <ListItem key={grant} sx={{display: 'list-item'}}>
                   <Typography sx={textStyles}>{grant}</Typography>
                 </ListItem>
               ))}
             </List>
           </Stack>
 
-          <Button color={'primary'} variant="contained">
+          <Button
+            color={'primary'}
+            variant="contained"
+            onClick={() => {
+              runGettingAuthCode(appId, tokenToGetGrants);
+            }}
+            disabled={isLoadingAuthCode}
+          >
             Подтвердить
           </Button>
 
