@@ -137,6 +137,10 @@ const theme = createTheme(
               // Stuff necessary for placing label above TextField (outside)
               // https://github.com/mui/material-ui/issues/30379#issuecomment-1175806105
               '& legend': {display: 'none'},
+              '& .MuiFormHelperText-root': {
+                position: 'absolute',
+                bottom: -20,
+              },
             },
           },
         ],

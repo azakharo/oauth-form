@@ -52,7 +52,7 @@ export const EnterPasswordStep = () => {
         }}
         noValidate
       >
-        <Stack spacing={2}>
+        <Stack spacing={4}>
           <PasswordInput
             name={'password'}
             label={'Пароль'}

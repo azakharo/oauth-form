@@ -58,7 +58,7 @@ export const EnterCodeStep = () => {
         }}
         noValidate
       >
-        <Stack spacing={2}>
+        <Stack spacing={4}>
           <TextFieldElement
             name={'code'}
             label={'Введите код'}
