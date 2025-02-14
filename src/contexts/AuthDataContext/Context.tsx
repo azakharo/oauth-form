@@ -8,6 +8,7 @@ import React, {
 
 export interface ContextProps {
   appId: string;
+  setAppId: (value: string) => void;
 
   phone: string;
   setPhone: (value: string) => void;
@@ -26,13 +27,16 @@ export interface ContextProps {
 
   tokenToGetGrants: string;
   setTokenToGetGrants: (value: string) => void;
-}
 
-// TODO appId must be taken from referrer
-const appId = 'MIF';
+  redirectUrl: string;
+  setRedirectUrl: (value: string) => void;
+  redirectStateParam: string;
+  setRedirectStateParam: (value: string) => void;
+}
 
 export const AuthDataContext = createContext<ContextProps>({
   appId: '',
+  setAppId: () => {},
   phone: '',
   setPhone: () => {},
   tokenToEnterSmsCode: '',
@@ -45,19 +49,27 @@ export const AuthDataContext = createContext<ContextProps>({
   setPassword: () => {},
   tokenToGetGrants: '',
   setTokenToGetGrants: () => {},
+  redirectUrl: '',
+  setRedirectUrl: () => {},
+  redirectStateParam: '',
+  setRedirectStateParam: () => {},
 });
 
 export const AuthDataProvider: FC<PropsWithChildren> = ({children}) => {
+  const [appId, setAppId] = useState('');
   const [phone, setPhone] = useState('');
   const [tokenToEnterSmsCode, setTokenToEnterSmsCode] = useState('');
   const [code, setCode] = useState('');
   const [tokenToEnterPassword, setTokenToEnterPassword] = useState('');
   const [password, setPassword] = useState('');
   const [tokenToGetGrants, setTokenToGetGrants] = useState('');
+  const [redirectUrl, setRedirectUrl] = useState('');
+  const [redirectStateParam, setRedirectStateParam] = useState('');
 
   const contextValue = useMemo(
     () => ({
       appId,
+      setAppId,
       phone,
       setPhone,
       tokenToEnterSmsCode,
@@ -70,8 +82,14 @@ export const AuthDataProvider: FC<PropsWithChildren> = ({children}) => {
       setPassword,
       tokenToGetGrants,
       setTokenToGetGrants,
+      redirectUrl,
+      setRedirectUrl,
+      redirectStateParam,
+      setRedirectStateParam,
     }),
     [
+      appId,
+      setAppId,
       phone,
       setPhone,
       code,
@@ -84,6 +102,10 @@ export const AuthDataProvider: FC<PropsWithChildren> = ({children}) => {
       setTokenToEnterPassword,
       tokenToGetGrants,
       setTokenToGetGrants,
+      redirectUrl,
+      setRedirectUrl,
+      redirectStateParam,
+      setRedirectStateParam,
     ],
   );
 

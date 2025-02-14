@@ -1,9 +1,10 @@
 import {useForm} from 'react-hook-form';
 import {TextFieldElement} from 'react-hook-form-mui';
-import {useNavigate} from 'react-router-dom';
+import {useNavigate, useSearchParams} from 'react-router-dom';
 import {yupResolver} from '@hookform/resolvers/yup';
 import ClearOutlinedIcon from '@mui/icons-material/ClearOutlined';
 import {Button, IconButton, Stack} from '@mui/material';
+import useMount from 'ahooks/es/useMount';
 import useRequest from 'ahooks/es/useRequest';
 import {object, string} from 'yup';
 
@@ -25,7 +26,15 @@ const v8nSchema = object().shape({
 
 export const EnterPhoneStep = () => {
   const navigate = useNavigate();
-  const {phone, setPhone, setTokenToEnterSmsCode} = useAuthData();
+  const [searchParams] = useSearchParams();
+  const {
+    phone,
+    setPhone,
+    setTokenToEnterSmsCode,
+    setAppId,
+    setRedirectUrl,
+    setRedirectStateParam,
+  } = useAuthData();
 
   const {control, handleSubmit, setValue, setError} = useForm({
     mode: 'onBlur',
@@ -45,6 +54,12 @@ export const EnterPhoneStep = () => {
     onError: err => {
       setError('phone', {type: 'custom', message: err.message});
     },
+  });
+
+  useMount(() => {
+    setAppId(searchParams.get('client_id') ?? '');
+    setRedirectUrl(searchParams.get('redirect_uri') ?? '');
+    setRedirectStateParam(searchParams.get('state') ?? '');
   });
 
   return (
