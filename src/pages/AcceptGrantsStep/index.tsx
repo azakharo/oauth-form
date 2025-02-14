@@ -23,7 +23,8 @@ const textStyles = {
 };
 
 export const AcceptGrantsStep = () => {
-  const {appId, tokenToGetGrants} = useAuthData();
+  const {appId, tokenToGetGrants, redirectUrl, redirectStateParam} =
+    useAuthData();
 
   const {
     loading: isLoadingAuthCode,
@@ -32,9 +33,11 @@ export const AcceptGrantsStep = () => {
   } = useRequest(getAuthCode, {
     manual: true,
     onSuccess: authCode => {
-      alert(
-        `От бэкенда получен auth code "${authCode}".\nДалее должен быть переход на callback url с передачей этого auth code.`,
-      );
+      const searchParams = new URLSearchParams();
+      searchParams.append('code', authCode);
+      searchParams.append('state', redirectStateParam);
+
+      window.location.replace(`${redirectUrl}?${searchParams.toString()}`);
     },
   });
 
