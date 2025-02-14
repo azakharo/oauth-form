@@ -21,9 +21,9 @@ export const PhoneFormat = React.forwardRef<PatternFormatProps, CustomProps>(
             },
           });
         }}
-        format="+7 ### ### ## ##"
+        format="+7 (###) ###-##-##"
         allowEmptyFormatting
-        mask=" "
+        mask={'_'}
         {...restProps}
       />
     );
