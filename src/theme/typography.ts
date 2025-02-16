@@ -12,6 +12,7 @@ declare module '@mui/material/styles' {
     h3bold: CSSProperties;
     button: CSSProperties;
     b1regular: CSSProperties;
+    b1light: CSSProperties;
     b1semibold: CSSProperties;
     b2regular: CSSProperties;
     b2semibold: CSSProperties;
@@ -28,6 +29,7 @@ declare module '@mui/material/styles' {
     h3bold?: CSSProperties;
     button?: CSSProperties;
     b1regular?: CSSProperties;
+    b1light?: CSSProperties;
     b1semibold?: CSSProperties;
     b2regular?: CSSProperties;
     b2semibold?: CSSProperties;
@@ -62,6 +64,7 @@ declare module '@mui/material/Typography' {
     h3bold: true;
     button: true;
     b1regular: true;
+    b1light: true;
     b1semibold: true;
     b2regular: true;
     b2semibold: true;
@@ -121,6 +124,11 @@ export const typographyOptions: TypographyOptions = {
     fontSize: 17,
     fontWeight: 500,
     lineHeight: '24px',
+  },
+  b1light: {
+    fontSize: 18,
+    fontWeight: 400,
+    lineHeight: '23px',
   },
   b1semibold: {
     fontSize: 17,
