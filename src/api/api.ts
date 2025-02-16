@@ -65,6 +65,8 @@ export const getGrants = async (
 ): Promise<{
   isAlreadyGranted: boolean;
   grants: string[];
+  imageUrl: string;
+  description: string;
 }> => {
   const response = await axi.get<{
     already_granted: boolean;
@@ -73,6 +75,8 @@ export const getGrants = async (
         value: string;
       }>;
     }>;
+    image_url: string;
+    description: string;
   }>('/api/oauth/authorize', {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -83,14 +87,16 @@ export const getGrants = async (
   });
 
   const data = response.data;
-  const backendGrants = data.grants;
+  const {grants: backendGrants, already_granted, image_url, description} = data;
 
   return {
-    isAlreadyGranted: data.already_granted,
+    isAlreadyGranted: already_granted,
     grants:
       Array.isArray(backendGrants) && backendGrants.length > 0
         ? backendGrants[0]!.fields.map(f => f.value)
         : [],
+    imageUrl: image_url,
+    description,
   };
 };
 

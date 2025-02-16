@@ -1,5 +1,6 @@
 import {
   Alert,
+  Avatar,
   Box,
   Button,
   CircularProgress,
@@ -80,6 +81,19 @@ export const AcceptGrantsStep = () => {
     return (
       <StepPageLayout title="Разрешить доступ">
         <Stack spacing={2}>
+          <Stack spacing={1} direction="row" alignItems="center">
+            <Avatar src={grantsData.imageUrl} variant="rounded" />
+
+            <Typography
+              sx={{
+                ...textStyles,
+                color: '#171717',
+              }}
+            >
+              {grantsData.description}
+            </Typography>
+          </Stack>
+
           <Typography sx={textStyles}>
             Приложению для дальнейшей работы требуется доступ к персональным
             данным пользователя.
