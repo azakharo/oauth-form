@@ -2,7 +2,7 @@ import {useForm} from 'react-hook-form';
 import {TextFieldElement} from 'react-hook-form-mui';
 import {useNavigate} from 'react-router-dom';
 import {yupResolver} from '@hookform/resolvers/yup';
-import {Button, Stack, Typography} from '@mui/material';
+import {Button, Stack} from '@mui/material';
 import useRequest from 'ahooks/es/useRequest';
 import {object, string} from 'yup';
 
@@ -12,7 +12,6 @@ import {enterSmsCode} from '@/api';
 import {StepPageLayout} from '@/components/StepPageLayout';
 import {ROUTE__ENTER_PASSWORD_STEP} from '@/constants';
 import {useAuthData} from '@/contexts/AuthDataContext';
-import {COLOR__GRAY} from '@/theme/colors';
 
 const codeRegExp = /^\d{4}$/;
 
@@ -48,7 +47,10 @@ export const EnterCodeStep = () => {
   });
 
   return (
-    <StepPageLayout title="Введите код">
+    <StepPageLayout
+      title="Введите код"
+      subTitle={`Мы отправили вам смс код на номер *${phone.slice(-4)}`}
+    >
       <form
         onSubmit={event => {
           const theReturnedFunc = handleSubmit(values => {
@@ -60,10 +62,6 @@ export const EnterCodeStep = () => {
         noValidate
       >
         <Stack spacing={4}>
-          <Typography align="center" sx={{color: COLOR__GRAY}}>
-            {`Мы отправили вам смс код на номер *${phone.slice(-4)}`}
-          </Typography>
-
           <TextFieldElement
             name={'code'}
             label={'Введите код'}

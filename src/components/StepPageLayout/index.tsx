@@ -1,37 +1,56 @@
 import {FC, PropsWithChildren} from 'react';
-import {Box, Typography} from '@mui/material';
+import {Box, Stack, Typography} from '@mui/material';
 
 import catImage from './cat.png';
 import Logo from './logo.svg?react';
 
-import {useIsDesktop} from '@/hooks/responsive';
+import {useIsDesktop, useIsTablet} from '@/hooks/responsive';
+import {COLOR__GRAY} from '@/theme/colors';
 
 interface Props {
   title: string;
+  subTitle?: string;
 }
 
 export const StepPageLayout: FC<PropsWithChildren<Props>> = ({
   title,
+  subTitle,
   children,
 }) => {
   const isDesktop = useIsDesktop();
+  const isTablet = useIsTablet();
 
   const content = (
     <>
       {/* This container is necessary to align the logo and title center horizontally */}
-      <Box display="flex" flexDirection="column" alignItems="center">
+      <Box
+        display="flex"
+        flexDirection="column"
+        alignItems={isTablet ? 'center' : 'flex-start'}
+      >
         <Logo width={210} height={'100%'} style={{marginBottom: 32}} />
 
-        <Typography
-          mb={4}
-          sx={{
-            fontSize: 28,
-            fontWeight: 500,
-            lineHeight: '28px',
-          }}
-        >
-          {title}
-        </Typography>
+        <Stack mb={5} alignItems={isTablet ? 'center' : 'flex-start'}>
+          <Typography
+            sx={{
+              fontSize: 28,
+              fontWeight: 500,
+              lineHeight: '28px',
+            }}
+          >
+            {title}
+          </Typography>
+
+          {subTitle && (
+            <Typography
+              align={isTablet ? 'center' : undefined}
+              sx={{color: COLOR__GRAY}}
+              mt={1.5}
+            >
+              {subTitle}
+            </Typography>
+          )}
+        </Stack>
       </Box>
 
       {children}
