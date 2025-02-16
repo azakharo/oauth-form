@@ -50,6 +50,7 @@ export const EnterCodeStep = () => {
     <StepPageLayout
       title="Введите код"
       subTitle={`Мы отправили вам смс код на номер *${phone.slice(-4)}`}
+      showBackButton
     >
       <form
         onSubmit={event => {

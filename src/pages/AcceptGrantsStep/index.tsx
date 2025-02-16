@@ -79,7 +79,7 @@ export const AcceptGrantsStep = () => {
 
   if (grantsData && !grantsData.isAlreadyGranted) {
     return (
-      <StepPageLayout title="Разрешить доступ">
+      <StepPageLayout title="Разрешить доступ" showBackButton>
         <Stack spacing={2}>
           <Stack spacing={1} direction="row" alignItems="center">
             <Avatar src={grantsData.imageUrl} variant="rounded" />

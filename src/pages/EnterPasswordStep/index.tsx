@@ -41,7 +41,7 @@ export const EnterPasswordStep = () => {
   });
 
   return (
-    <StepPageLayout title="Введите пароль">
+    <StepPageLayout title="Введите пароль" showBackButton>
       <form
         onSubmit={event => {
           const theReturnedFunc = handleSubmit(values => {

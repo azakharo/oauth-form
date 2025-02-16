@@ -1,5 +1,7 @@
 import {FC, PropsWithChildren} from 'react';
-import {Box, Stack, Typography} from '@mui/material';
+import {useNavigate} from 'react-router-dom';
+import WestOutlinedIcon from '@mui/icons-material/WestOutlined';
+import {Box, IconButton, Stack, Typography} from '@mui/material';
 
 import catImage from './cat.png';
 import Logo from './logo.svg?react';
@@ -10,15 +12,18 @@ import {COLOR__GRAY} from '@/theme/colors';
 interface Props {
   title: string;
   subTitle?: string;
+  showBackButton?: boolean;
 }
 
 export const StepPageLayout: FC<PropsWithChildren<Props>> = ({
   title,
   subTitle,
+  showBackButton,
   children,
 }) => {
   const isDesktop = useIsDesktop();
   const isTablet = useIsTablet();
+  const navigate = useNavigate();
 
   const content = (
     <>
@@ -30,16 +35,41 @@ export const StepPageLayout: FC<PropsWithChildren<Props>> = ({
       >
         <Logo width={210} height={'100%'} style={{marginBottom: 32}} />
 
-        <Stack mb={5} alignItems={isTablet ? 'center' : 'flex-start'}>
-          <Typography
-            sx={{
-              fontSize: 28,
-              fontWeight: 500,
-              lineHeight: '28px',
-            }}
-          >
-            {title}
-          </Typography>
+        <Stack
+          mb={5}
+          alignItems={isTablet ? 'center' : 'flex-start'}
+          sx={{position: 'relative', width: '100%'}}
+        >
+          <Stack direction="row" spacing={0.5} alignItems="center">
+            {showBackButton && (
+              <IconButton
+                sx={{
+                  color: '#292D32',
+                  ...(isTablet
+                    ? {
+                        position: 'absolute',
+                        left: 0,
+                      }
+                    : {}),
+                }}
+                onClick={() => {
+                  navigate(-1);
+                }}
+              >
+                <WestOutlinedIcon />
+              </IconButton>
+            )}
+
+            <Typography
+              sx={{
+                fontSize: 28,
+                fontWeight: 500,
+                lineHeight: '28px',
+              }}
+            >
+              {title}
+            </Typography>
+          </Stack>
 
           {subTitle && (
             <Typography
