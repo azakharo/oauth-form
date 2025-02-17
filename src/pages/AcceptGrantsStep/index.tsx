@@ -1,3 +1,4 @@
+import {useNavigate} from 'react-router-dom';
 import {
   Alert,
   Avatar,
@@ -24,6 +25,7 @@ const textStyles = {
 };
 
 export const AcceptGrantsStep = () => {
+  const navigate = useNavigate();
   const {appId, tokenToGetGrants, redirectUrl, redirectStateParam} =
     useAuthData();
 
@@ -129,7 +131,13 @@ export const AcceptGrantsStep = () => {
             Подтвердить
           </Button>
 
-          <Button color={'primary'} variant="outlined">
+          <Button
+            color={'primary'}
+            variant="outlined"
+            onClick={() => {
+              navigate(-1);
+            }}
+          >
             Отклонить
           </Button>
         </Stack>
