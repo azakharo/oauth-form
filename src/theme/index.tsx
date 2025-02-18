@@ -100,6 +100,19 @@ const theme = createTheme(
               //   color: COLOR__MAIN_BLACK,
               // },
             }),
+            ...(ownerState.variant === 'outlined' && {
+              backgroundColor: '#FFFAEC',
+              color: '#FFA806',
+              border: '1px solid transparent',
+              '& span.MuiCircularProgress-root': {
+                color: COLOR__PRIMARY,
+              },
+              '&.Mui-disabled': {
+                backgroundColor: '#FFFAEC',
+                color: '#FFE083',
+                border: '1px solid transparent',
+              },
+            }),
           }),
           sizeMedium: {
             padding: '14px 32px',
