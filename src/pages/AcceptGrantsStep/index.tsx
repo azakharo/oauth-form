@@ -15,6 +15,7 @@ import useRequest from 'ahooks/es/useRequest';
 import {getAuthCode, getGrants} from '@/api';
 import {StepPageLayout} from '@/components/StepPageLayout';
 import {useAuthData} from '@/contexts/AuthDataContext';
+import {useIsTablet} from '@/hooks/responsive';
 import {COLOR__SECONDARY} from '@/theme/colors';
 
 const textStyles = {
@@ -26,6 +27,7 @@ const textStyles = {
 
 export const AcceptGrantsStep = () => {
   const navigate = useNavigate();
+  const isTablet = useIsTablet();
   const {appId, tokenToGetGrants, redirectUrl, redirectStateParam} =
     useAuthData();
 
@@ -120,26 +122,36 @@ export const AcceptGrantsStep = () => {
             </List>
           </Stack>
 
-          <Button
-            color={'primary'}
-            variant="contained"
-            onClick={() => {
-              runGettingAuthCode(appId, tokenToGetGrants);
+          <Stack
+            spacing={2}
+            direction={isTablet ? 'row' : undefined}
+            sx={{
+              '& > button': {
+                flex: isTablet ? 1 : undefined,
+              },
             }}
-            disabled={isLoadingAuthCode}
           >
-            Подтвердить
-          </Button>
+            <Button
+              color={'primary'}
+              variant="contained"
+              onClick={() => {
+                runGettingAuthCode(appId, tokenToGetGrants);
+              }}
+              disabled={isLoadingAuthCode}
+            >
+              Подтвердить
+            </Button>
 
-          <Button
-            color={'primary'}
-            variant="outlined"
-            onClick={() => {
-              navigate(-1);
-            }}
-          >
-            Отклонить
-          </Button>
+            <Button
+              color={'primary'}
+              variant="outlined"
+              onClick={() => {
+                navigate(-1);
+              }}
+            >
+              Отклонить
+            </Button>
+          </Stack>
         </Stack>
       </StepPageLayout>
     );
