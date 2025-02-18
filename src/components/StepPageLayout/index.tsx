@@ -7,7 +7,7 @@ import catImage from './cat.png';
 import {HelpButton} from './HelpButton';
 import Logo from './logo.svg?react';
 
-import {useIsDesktop, useIsMobile, useIsTablet} from '@/hooks/responsive';
+import {useIsDesktop, useIsTablet} from '@/hooks/responsive';
 import {COLOR__GRAY} from '@/theme/colors';
 
 interface Props {
@@ -24,7 +24,6 @@ export const StepPageLayout: FC<PropsWithChildren<Props>> = ({
 }) => {
   const isDesktop = useIsDesktop();
   const isTablet = useIsTablet();
-  const isMobile = useIsMobile();
   const navigate = useNavigate();
 
   const content = (
@@ -87,17 +86,15 @@ export const StepPageLayout: FC<PropsWithChildren<Props>> = ({
 
       {children}
 
-      {!isMobile && (
-        <Box
-          sx={{
-            position: 'fixed',
-            bottom: 32,
-            right: 32,
-          }}
-        >
-          <HelpButton />
-        </Box>
-      )}
+      <Box
+        sx={{
+          position: 'fixed',
+          bottom: 32,
+          right: 32,
+        }}
+      >
+        <HelpButton />
+      </Box>
     </>
   );
 

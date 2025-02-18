@@ -34,7 +34,10 @@ export const HelpButton: FC = () => {
         aria-label="help"
         sx={{
           backgroundColor: COLOR__WHITE,
-          color: COLOR__SECONDARY,
+          color: '#2D2926',
+          '&:hover': {
+            color: COLOR__SECONDARY,
+          },
         }}
         onClick={handleClick}
         aria-describedby={popoverId}
