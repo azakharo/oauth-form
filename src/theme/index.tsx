@@ -1,3 +1,5 @@
+// This import is necessary for theming mui/lab components
+// noinspection ES6UnusedImports
 import type {} from '@mui/lab/themeAugmentation';
 import {CircularProgress, colors} from '@mui/material';
 import {ruRU} from '@mui/material/locale';
