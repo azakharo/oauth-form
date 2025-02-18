@@ -11,6 +11,7 @@ import {AcceptGrantsStep} from '@/pages/AcceptGrantsStep';
 import {EnterCodeStep} from '@/pages/EnterCodeStep';
 import {EnterPasswordStep} from '@/pages/EnterPasswordStep';
 import {EnterPhoneStep} from '@/pages/EnterPhoneStep';
+import {TestButtons} from '@/pages/TestButtons';
 
 const Routes: FC = () => {
   return (
@@ -22,6 +23,7 @@ const Routes: FC = () => {
         element={<EnterPasswordStep />}
       />
       <Route path={ROUTE__ACCEPT_GRANTS_STEP} element={<AcceptGrantsStep />} />
+      <Route path="/buttons" element={<TestButtons />} />
       <Route
         path="*"
         element={<Navigate to={ROUTE__ENTER_PHONE_STEP} replace />}
