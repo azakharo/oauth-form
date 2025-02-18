@@ -1,4 +1,5 @@
 import {useNavigate} from 'react-router-dom';
+import {LoadingButton} from '@mui/lab';
 import {
   Alert,
   Avatar,
@@ -16,7 +17,7 @@ import {getAuthCode, getGrants} from '@/api';
 import {StepPageLayout} from '@/components/StepPageLayout';
 import {useAuthData} from '@/contexts/AuthDataContext';
 import {useIsTablet} from '@/hooks/responsive';
-import {COLOR__SECONDARY} from '@/theme/colors';
+import {COLOR__MAIN_BLACK, COLOR__SECONDARY} from '@/theme/colors';
 
 const textStyles = {
   fontWeight: 400,
@@ -91,7 +92,7 @@ export const AcceptGrantsStep = () => {
             <Typography
               sx={{
                 ...textStyles,
-                color: '#171717',
+                color: COLOR__MAIN_BLACK,
               }}
             >
               {grantsData.description}
@@ -131,16 +132,15 @@ export const AcceptGrantsStep = () => {
               },
             }}
           >
-            <Button
+            <LoadingButton
               color={'primary'}
-              variant="contained"
               onClick={() => {
                 runGettingAuthCode(appId, tokenToGetGrants);
               }}
-              disabled={isLoadingAuthCode}
+              loading={isLoadingAuthCode}
             >
               Подтвердить
-            </Button>
+            </LoadingButton>
 
             <Button
               color={'primary'}

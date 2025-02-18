@@ -1,7 +1,8 @@
 import {useForm} from 'react-hook-form';
 import {useNavigate} from 'react-router-dom';
 import {yupResolver} from '@hookform/resolvers/yup';
-import {Button, Stack} from '@mui/material';
+import {LoadingButton} from '@mui/lab';
+import {Stack} from '@mui/material';
 import useRequest from 'ahooks/es/useRequest';
 import {object, string} from 'yup';
 
@@ -71,14 +72,9 @@ export const EnterPasswordStep = () => {
             autoComplete="current-password"
           />
 
-          <Button
-            type={'submit'}
-            color={'primary'}
-            variant="contained"
-            disabled={loading}
-          >
+          <LoadingButton type={'submit'} color={'primary'} loading={loading}>
             Далее
-          </Button>
+          </LoadingButton>
         </Stack>
       </form>
     </StepPageLayout>

@@ -2,13 +2,17 @@ import {FC, MouseEvent, useState} from 'react';
 import QuestionMarkOutlinedIcon from '@mui/icons-material/QuestionMarkOutlined';
 import {Fab, Link, Popover, Stack, Typography} from '@mui/material';
 
-import {COLOR__SECONDARY, COLOR__WHITE} from '@/theme/colors';
+import {
+  COLOR__MAIN_BLACK,
+  COLOR__SECONDARY,
+  COLOR__WHITE,
+} from '@/theme/colors';
 
 const textStyles = {
   fontWeight: 400,
   fontSize: 16,
   lineHeight: '20px',
-  color: '#171717',
+  color: COLOR__MAIN_BLACK,
 };
 
 export const HelpButton: FC = () => {

@@ -3,7 +3,8 @@ import {TextFieldElement} from 'react-hook-form-mui';
 import {useNavigate, useSearchParams} from 'react-router-dom';
 import {yupResolver} from '@hookform/resolvers/yup';
 import ClearOutlinedIcon from '@mui/icons-material/ClearOutlined';
-import {Button, IconButton, Stack} from '@mui/material';
+import {LoadingButton} from '@mui/lab';
+import {IconButton, Stack} from '@mui/material';
 import useMount from 'ahooks/es/useMount';
 import useRequest from 'ahooks/es/useRequest';
 import {object, string} from 'yup';
@@ -104,14 +105,9 @@ export const EnterPhoneStep = () => {
             autoFocus
           />
 
-          <Button
-            type={'submit'}
-            color={'primary'}
-            variant="contained"
-            disabled={loading}
-          >
+          <LoadingButton type={'submit'} color={'primary'} loading={loading}>
             Получить код
-          </Button>
+          </LoadingButton>
         </Stack>
       </form>
     </StepPageLayout>

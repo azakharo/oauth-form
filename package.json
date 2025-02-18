@@ -15,7 +15,8 @@
     "@emotion/styled": "11.14.0",
     "@hookform/resolvers": "3.9.1",
     "@mui/icons-material": "5.15.17",
-    "@mui/material": "5.15.17",
+    "@mui/lab": "5.0.0-alpha.175",
+    "@mui/material": "5.16.14",
     "ahooks": "3.8.4",
     "axios": "1.7.9",
     "clsx": "2.1.1",
@@ -51,7 +52,7 @@
     "prettier": "3.4.2",
     "typescript": "5.2.2",
     "vite": "5.4.11",
-    "vitest": "2.1.8"
+    "vitest": "2.1.9"
   },
   "engines": {
     "npm": ">=8.19.2 <11.0.0",

@@ -3,7 +3,8 @@ import {useForm} from 'react-hook-form';
 import {TextFieldElement} from 'react-hook-form-mui';
 import {useNavigate} from 'react-router-dom';
 import {yupResolver} from '@hookform/resolvers/yup';
-import {Alert, Box, Button, Stack, Typography} from '@mui/material';
+import {LoadingButton} from '@mui/lab';
+import {Alert, Box, Stack, Typography} from '@mui/material';
 import useCountDown from 'ahooks/es/useCountDown';
 import useMount from 'ahooks/es/useMount';
 import useRequest from 'ahooks/es/useRequest';
@@ -128,14 +129,9 @@ export const EnterCodeStep = () => {
             autoFocus
           />
 
-          <Button
-            type={'submit'}
-            color={'primary'}
-            variant="contained"
-            disabled={loading}
-          >
+          <LoadingButton type={'submit'} color={'primary'} loading={loading}>
             Далее
-          </Button>
+          </LoadingButton>
         </Stack>
 
         {!!countdown && (
@@ -153,18 +149,18 @@ export const EnterCodeStep = () => {
         )}
 
         {countdown === 0 && (
-          <Button
+          <LoadingButton
             variant="text"
             color="secondary"
             fullWidth
             sx={{display: 'block', marginTop: '8px'}}
             onClick={resendSmsCode}
-            disabled={isSendingPhone}
+            loading={isSendingPhone}
           >
             <Typography variant="button" align="center">
               Отправить код повторно
             </Typography>
-          </Button>
+          </LoadingButton>
         )}
 
         {errorSendingPhone && (

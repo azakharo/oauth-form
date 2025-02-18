@@ -1,4 +1,5 @@
-import {colors} from '@mui/material';
+import type {} from '@mui/lab/themeAugmentation';
+import {CircularProgress, colors} from '@mui/material';
 import {ruRU} from '@mui/material/locale';
 import {createTheme} from '@mui/material/styles';
 
@@ -178,6 +179,14 @@ const theme = createTheme(
       MuiTypography: {
         defaultProps: {
           variant: 'b1light',
+        },
+      },
+      MuiLoadingButton: {
+        defaultProps: {
+          variant: 'contained',
+          loadingIndicator: (
+            <CircularProgress size={20} sx={{color: COLOR__MAIN_BLACK}} />
+          ),
         },
       },
     },
