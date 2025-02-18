@@ -1,13 +1,14 @@
 import {FC, PropsWithChildren} from 'react';
 import {useNavigate} from 'react-router-dom';
+import QuestionMarkOutlinedIcon from '@mui/icons-material/QuestionMarkOutlined';
 import WestOutlinedIcon from '@mui/icons-material/WestOutlined';
-import {Box, IconButton, Stack, Typography} from '@mui/material';
+import {Box, Fab, IconButton, Stack, Typography} from '@mui/material';
 
 import catImage from './cat.png';
 import Logo from './logo.svg?react';
 
-import {useIsDesktop, useIsTablet} from '@/hooks/responsive';
-import {COLOR__GRAY} from '@/theme/colors';
+import {useIsDesktop, useIsMobile, useIsTablet} from '@/hooks/responsive';
+import {COLOR__GRAY, COLOR__SECONDARY, COLOR__WHITE} from '@/theme/colors';
 
 interface Props {
   title: string;
@@ -23,6 +24,7 @@ export const StepPageLayout: FC<PropsWithChildren<Props>> = ({
 }) => {
   const isDesktop = useIsDesktop();
   const isTablet = useIsTablet();
+  const isMobile = useIsMobile();
   const navigate = useNavigate();
 
   const content = (
@@ -84,6 +86,22 @@ export const StepPageLayout: FC<PropsWithChildren<Props>> = ({
       </Box>
 
       {children}
+
+      {!isMobile && (
+        <Fab
+          size="small"
+          aria-label="help"
+          sx={{
+            position: 'fixed',
+            bottom: 32,
+            right: 32,
+            backgroundColor: COLOR__WHITE,
+            color: COLOR__SECONDARY,
+          }}
+        >
+          <QuestionMarkOutlinedIcon />
+        </Fab>
+      )}
     </>
   );
 
