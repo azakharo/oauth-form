@@ -107,6 +107,14 @@ const theme = createTheme(
               '& span.MuiCircularProgress-root': {
                 color: COLOR__PRIMARY,
               },
+              '&:hover': {
+                backgroundColor: '#FFF3D0',
+                border: '1px solid transparent',
+              },
+              '&:active': {
+                backgroundColor: '#FFF3D0',
+                border: '1px solid transparent',
+              },
               '&.Mui-disabled': {
                 backgroundColor: '#FFFAEC',
                 color: '#FFE083',
