@@ -58,7 +58,7 @@ npm run ts
 <ssh to production server>
 cd <any working directory you want>
 <git fetch and checkout any-branch-or-master>
-docker-compose --build --build-arg mode="production"
+docker-compose build --build-arg mode="production"
 docker-compose up -d
 ```
 
