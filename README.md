@@ -51,3 +51,16 @@ Run type checking:
 ```sh
 npm run ts
 ```
+
+## Deploy to production
+
+```sh
+<ssh to production server>
+cd <any working directory you want>
+<git fetch and checkout any-branch-or-master>
+docker-compose --build --build-arg mode="production"
+docker-compose up -d
+```
+
+After running those commands the application will be started on the production server on port 8082.  
+The port number can be changed in `./docker-compose.yml`

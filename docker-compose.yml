@@ -1,0 +1,16 @@
+version: '3'
+services:
+  frontend:
+    build:
+      context: .
+      dockerfile: ./docker/Dockerfile
+    deploy:
+      resources:
+          limits:
+            cpus: '0.5'
+            memory: 512m
+          reservations:
+            cpus: '0.25'
+            memory: 128m
+    ports:
+      - 8082:80
