@@ -43,7 +43,7 @@ export const AcceptGrantsStep = () => {
       searchParams.append('code', authCode);
       searchParams.append('state', redirectStateParam);
 
-      window.location.replace(`${redirectUrl}?${searchParams.toString()}`);
+      window.location.href = `${redirectUrl}?${searchParams.toString()}`;
     },
   });
 
