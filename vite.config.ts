@@ -9,6 +9,7 @@ export default defineConfig(({mode}) => {
   const {VITE_API_URL} = loadEnv(mode, process.cwd());
 
   return {
+    base: './',
     plugins: [
       react(),
       // svgr options: https://react-svgr.com/docs/options/
