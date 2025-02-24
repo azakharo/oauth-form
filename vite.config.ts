@@ -6,10 +6,10 @@ import react from '@vitejs/plugin-react';
 import svgr from 'vite-plugin-svgr';
 
 export default defineConfig(({mode}) => {
-  const {VITE_API_URL} = loadEnv(mode, process.cwd());
+  const {VITE_API_URL, VITE_PUBLIC_PATH} = loadEnv(mode, process.cwd());
 
   return {
-    base: './',
+    base: VITE_PUBLIC_PATH,
     plugins: [
       react(),
       // svgr options: https://react-svgr.com/docs/options/
