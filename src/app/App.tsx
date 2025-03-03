@@ -35,7 +35,7 @@ const App = () => {
 
   return (
     <ThemeProvider theme={theme}>
-      <BrowserRouter>
+      <BrowserRouter basename={import.meta.env.VITE_PUBLIC_PATH}>
         <GlobalStyles />
         <AuthDataProvider>
           <Routes />
